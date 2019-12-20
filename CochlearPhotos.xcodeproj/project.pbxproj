@@ -1,0 +1,487 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00598202DA871122837C3212 /* Pods_CochlearPhotos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A765F85D270C5477E32A7C /* Pods_CochlearPhotos.framework */; };
+		6981941A23ACA2A40029821F /* LocationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981941923ACA2A40029821F /* LocationsAPI.swift */; };
+		6981941C23ACA37F0029821F /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981941B23ACA37F0029821F /* Plist.swift */; };
+		6981941E23ACA3C10029821F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981941D23ACA3C10029821F /* API.swift */; };
+		6981942023ACA44F0029821F /* API.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6981941F23ACA44F0029821F /* API.plist */; };
+		6981942223ACA68C0029821F /* LocationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981942123ACA68C0029821F /* LocationList.swift */; };
+		6981942423ACAA4F0029821F /* ParseJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981942323ACAA4F0029821F /* ParseJSON.swift */; };
+		6981942C23ACC6730029821F /* locations.db in Resources */ = {isa = PBXBuildFile; fileRef = 6981942B23ACC6730029821F /* locations.db */; };
+		6981942E23ACC7840029821F /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981942D23ACC7840029821F /* DBManager.swift */; };
+		6981943023ACC8080029821F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981942F23ACC8080029821F /* Location.swift */; };
+		6981943223ACDDB20029821F /* LocAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981943123ACDDB20029821F /* LocAnnotation.swift */; };
+		699A2EDC23AC9F4000537FDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A2EDB23AC9F4000537FDF /* AppDelegate.swift */; };
+		699A2EDE23AC9F4000537FDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A2EDD23AC9F4000537FDF /* SceneDelegate.swift */; };
+		699A2EE023AC9F4000537FDF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A2EDF23AC9F4000537FDF /* ViewController.swift */; };
+		699A2EE323AC9F4000537FDF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 699A2EE123AC9F4000537FDF /* Main.storyboard */; };
+		699A2EE523AC9F4200537FDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 699A2EE423AC9F4200537FDF /* Assets.xcassets */; };
+		699A2EE823AC9F4200537FDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 699A2EE623AC9F4200537FDF /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		22A765F85D270C5477E32A7C /* Pods_CochlearPhotos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CochlearPhotos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6981941923ACA2A40029821F /* LocationsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsAPI.swift; sourceTree = "<group>"; };
+		6981941B23ACA37F0029821F /* Plist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plist.swift; sourceTree = "<group>"; };
+		6981941D23ACA3C10029821F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		6981941F23ACA44F0029821F /* API.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = API.plist; sourceTree = "<group>"; };
+		6981942123ACA68C0029821F /* LocationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationList.swift; sourceTree = "<group>"; };
+		6981942323ACAA4F0029821F /* ParseJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseJSON.swift; sourceTree = "<group>"; };
+		6981942B23ACC6730029821F /* locations.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = locations.db; sourceTree = "<group>"; };
+		6981942D23ACC7840029821F /* DBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
+		6981942F23ACC8080029821F /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		6981943123ACDDB20029821F /* LocAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocAnnotation.swift; sourceTree = "<group>"; };
+		699A2ED823AC9F4000537FDF /* CochlearPhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CochlearPhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		699A2EDB23AC9F4000537FDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		699A2EDD23AC9F4000537FDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		699A2EDF23AC9F4000537FDF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		699A2EE223AC9F4000537FDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		699A2EE423AC9F4200537FDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		699A2EE723AC9F4200537FDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		699A2EE923AC9F4200537FDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		849298562A641E8EDF1EFDD7 /* Pods-CochlearPhotos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CochlearPhotos.release.xcconfig"; path = "Target Support Files/Pods-CochlearPhotos/Pods-CochlearPhotos.release.xcconfig"; sourceTree = "<group>"; };
+		DE3B5E7091D8A7981A3E7751 /* Pods-CochlearPhotos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CochlearPhotos.debug.xcconfig"; path = "Target Support Files/Pods-CochlearPhotos/Pods-CochlearPhotos.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		699A2ED523AC9F4000537FDF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00598202DA871122837C3212 /* Pods_CochlearPhotos.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		10777B69DABD29A236AED91D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DE3B5E7091D8A7981A3E7751 /* Pods-CochlearPhotos.debug.xcconfig */,
+				849298562A641E8EDF1EFDD7 /* Pods-CochlearPhotos.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		1F51062E68EA693877DA24CC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				22A765F85D270C5477E32A7C /* Pods_CochlearPhotos.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6981942523ACAB370029821F /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6981941F23ACA44F0029821F /* API.plist */,
+				6981941D23ACA3C10029821F /* API.swift */,
+				6981941923ACA2A40029821F /* LocationsAPI.swift */,
+				6981942323ACAA4F0029821F /* ParseJSON.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		6981942623ACAB7D0029821F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6981941B23ACA37F0029821F /* Plist.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		6981942723ACABAF0029821F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				699A2EDF23AC9F4000537FDF /* ViewController.swift */,
+				6981943123ACDDB20029821F /* LocAnnotation.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6981942823ACC6070029821F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6981942D23ACC7840029821F /* DBManager.swift */,
+				6981942B23ACC6730029821F /* locations.db */,
+				6981942F23ACC8080029821F /* Location.swift */,
+				6981942123ACA68C0029821F /* LocationList.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		699A2ECF23AC9F4000537FDF = {
+			isa = PBXGroup;
+			children = (
+				699A2EDA23AC9F4000537FDF /* CochlearPhotos */,
+				699A2ED923AC9F4000537FDF /* Products */,
+				10777B69DABD29A236AED91D /* Pods */,
+				1F51062E68EA693877DA24CC /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		699A2ED923AC9F4000537FDF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				699A2ED823AC9F4000537FDF /* CochlearPhotos.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		699A2EDA23AC9F4000537FDF /* CochlearPhotos */ = {
+			isa = PBXGroup;
+			children = (
+				6981942723ACABAF0029821F /* ViewControllers */,
+				6981942623ACAB7D0029821F /* Helpers */,
+				6981942823ACC6070029821F /* Model */,
+				6981942523ACAB370029821F /* Service */,
+				699A2EDB23AC9F4000537FDF /* AppDelegate.swift */,
+				699A2EDD23AC9F4000537FDF /* SceneDelegate.swift */,
+				699A2EE123AC9F4000537FDF /* Main.storyboard */,
+				699A2EE423AC9F4200537FDF /* Assets.xcassets */,
+				699A2EE623AC9F4200537FDF /* LaunchScreen.storyboard */,
+				699A2EE923AC9F4200537FDF /* Info.plist */,
+			);
+			path = CochlearPhotos;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		699A2ED723AC9F4000537FDF /* CochlearPhotos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 699A2EEC23AC9F4200537FDF /* Build configuration list for PBXNativeTarget "CochlearPhotos" */;
+			buildPhases = (
+				3F48B057786C655432A7A8D9 /* [CP] Check Pods Manifest.lock */,
+				699A2ED423AC9F4000537FDF /* Sources */,
+				699A2ED523AC9F4000537FDF /* Frameworks */,
+				699A2ED623AC9F4000537FDF /* Resources */,
+				D158357FA06FF408454A0F58 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CochlearPhotos;
+			productName = CochlearPhotos;
+			productReference = 699A2ED823AC9F4000537FDF /* CochlearPhotos.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		699A2ED023AC9F4000537FDF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Nomad Agency";
+				TargetAttributes = {
+					699A2ED723AC9F4000537FDF = {
+						CreatedOnToolsVersion = 11.3;
+					};
+				};
+			};
+			buildConfigurationList = 699A2ED323AC9F4000537FDF /* Build configuration list for PBXProject "CochlearPhotos" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 699A2ECF23AC9F4000537FDF;
+			productRefGroup = 699A2ED923AC9F4000537FDF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				699A2ED723AC9F4000537FDF /* CochlearPhotos */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		699A2ED623AC9F4000537FDF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				699A2EE823AC9F4200537FDF /* LaunchScreen.storyboard in Resources */,
+				6981942023ACA44F0029821F /* API.plist in Resources */,
+				699A2EE523AC9F4200537FDF /* Assets.xcassets in Resources */,
+				6981942C23ACC6730029821F /* locations.db in Resources */,
+				699A2EE323AC9F4000537FDF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3F48B057786C655432A7A8D9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CochlearPhotos-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D158357FA06FF408454A0F58 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CochlearPhotos/Pods-CochlearPhotos-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CochlearPhotos/Pods-CochlearPhotos-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CochlearPhotos/Pods-CochlearPhotos-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		699A2ED423AC9F4000537FDF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6981941C23ACA37F0029821F /* Plist.swift in Sources */,
+				699A2EE023AC9F4000537FDF /* ViewController.swift in Sources */,
+				6981943223ACDDB20029821F /* LocAnnotation.swift in Sources */,
+				699A2EDC23AC9F4000537FDF /* AppDelegate.swift in Sources */,
+				699A2EDE23AC9F4000537FDF /* SceneDelegate.swift in Sources */,
+				6981942E23ACC7840029821F /* DBManager.swift in Sources */,
+				6981943023ACC8080029821F /* Location.swift in Sources */,
+				6981941E23ACA3C10029821F /* API.swift in Sources */,
+				6981941A23ACA2A40029821F /* LocationsAPI.swift in Sources */,
+				6981942223ACA68C0029821F /* LocationList.swift in Sources */,
+				6981942423ACAA4F0029821F /* ParseJSON.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		699A2EE123AC9F4000537FDF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				699A2EE223AC9F4000537FDF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		699A2EE623AC9F4200537FDF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				699A2EE723AC9F4200537FDF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		699A2EEA23AC9F4200537FDF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		699A2EEB23AC9F4200537FDF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		699A2EED23AC9F4200537FDF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DE3B5E7091D8A7981A3E7751 /* Pods-CochlearPhotos.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0;
+				DEVELOPMENT_TEAM = R7769RMD73;
+				INFOPLIST_FILE = CochlearPhotos/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cochlear.CochlearPhotos;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		699A2EEE23AC9F4200537FDF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 849298562A641E8EDF1EFDD7 /* Pods-CochlearPhotos.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0;
+				DEVELOPMENT_TEAM = R7769RMD73;
+				INFOPLIST_FILE = CochlearPhotos/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cochlear.CochlearPhotos;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		699A2ED323AC9F4000537FDF /* Build configuration list for PBXProject "CochlearPhotos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				699A2EEA23AC9F4200537FDF /* Debug */,
+				699A2EEB23AC9F4200537FDF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		699A2EEC23AC9F4200537FDF /* Build configuration list for PBXNativeTarget "CochlearPhotos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				699A2EED23AC9F4200537FDF /* Debug */,
+				699A2EEE23AC9F4200537FDF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 699A2ED023AC9F4000537FDF /* Project object */;
+}
