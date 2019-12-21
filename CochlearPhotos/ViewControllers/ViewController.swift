@@ -13,9 +13,27 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var locationsView: UIView!
+    
+    @IBOutlet weak var mapListHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var locTableView: UITableView!
+    
+    let locationDetailSegue = "locationDetailSegue"
+    
+    var mapViewHeight: CGFloat!
+    var locViewOriginalCenter: CGPoint!
+    var locViewOriginalY: CGFloat!
+    
+    let mapGap: CGFloat = 100
+    var mapGapBottom: CGFloat!
+    
+    var locList: [Location] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mapViewHeight = self.view.frame.height
         mapView.delegate = self
         // Do any additional setup after loading the view.
         if DBManager.shared.openOrCopyDatabase() { // initialise a singleton instance of the database
@@ -33,6 +51,11 @@ class ViewController: UIViewController {
                 mapView.setRegion(region, animated: true)
             }
         }
+        mapListHeightConstraint.constant = mapViewHeight - mapGap
+        mapGapBottom = mapViewHeight - mapGap
+        print (mapGapBottom!)
+        
+        setupLocTableView()
         
     }
 
@@ -49,7 +72,47 @@ class ViewController: UIViewController {
             })
         }
     }
+   
 
+    @IBAction func didPanMapListView(_ sender: UIPanGestureRecognizer) {
+        
+        let translation = sender.translation(in: view)
+     //   print("translation \(translation)")
+        
+        if sender.state == UIGestureRecognizer.State.began {
+            locViewOriginalCenter = locationsView.center
+            locViewOriginalY = locationsView.frame.origin.y
+
+            print(locationsView.frame.origin.y)
+        } else if sender.state == UIGestureRecognizer.State.changed {
+            print(locationsView.frame.origin.y)
+            let newCentre = CGPoint(x: locViewOriginalCenter.x, y: locViewOriginalCenter.y + translation.y)
+        if locationsView.frame.origin.y >= mapGap && locationsView.frame.origin.y <= mapGapBottom {
+            locationsView.center = newCentre
+            }
+        } else if sender.state == UIGestureRecognizer.State.ended {
+            if locationsView.frame.origin.y < mapGap {
+                UIView.animate(withDuration:1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options:[] ,
+                animations: { () -> Void in
+                    self.locationsView.frame.origin.y = self.mapGap
+                }, completion: nil)
+                
+            }else if (locationsView.frame.origin.y > mapGapBottom ) {
+                UIView.animate(withDuration:1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options:[] ,
+                animations: { () -> Void in
+                    self.locationsView.frame.origin.y = self.mapGapBottom
+                }, completion: nil)
+            }
+        }
+    }
+    
+    func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+        if segue.identifier == locationDetailSegue {
+
+        }
+    }
+    
+    
 }
 extension ViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -80,4 +143,72 @@ extension ViewController: MKMapViewDelegate {
         present(ac, animated: true)
  */
     }
+}
+
+extension ViewController:  UITableViewDataSource, UITableViewDelegate {
+    
+    func setupLocTableView() {
+
+        locList = Location.getAll() ?? [Location]()
+        
+        locTableView.delegate = self
+        locTableView.dataSource = self
+        locTableView.tableFooterView = UIView()
+        
+        locTableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 { return 0}
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+           let headerView = UIView()
+           headerView.backgroundColor = UIColor.clear
+           return headerView
+       }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return locList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "locCell")!
+        let loc: Location = locList[indexPath.section]
+        cell.layer.cornerRadius = 30
+        cell.textLabel?.text = loc.name
+    //    cell.detailTextLabel?.text = loc.name
+
+        /*
+        let imageView : UIImageView = UIImageView(frame:CGRect(x: 0, y: 0, width: 20, height: 20))
+        imageView.contentMode = .scaleAspectFit
+        if more.linkType == MoreNavigation.LinkType.EXTERNAL.rawValue {
+            imageView.image = UIImage(named:Imge.Card.Link.offsite)
+        }else if more.linkType == MoreNavigation.LinkType.SETTINGS.rawValue {
+            imageView.image = UIImage(named:Imge.Card.Link.offsite)
+        }
+ */
+  //      cell.accessoryView = imageView
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let loc = locList[indexPath.section]
+        
+        performSegue(withIdentifier: locationDetailSegue, sender: nil)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90.0
+    }
+    
 }

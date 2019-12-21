@@ -5,7 +5,6 @@
 //  Created by Clayton on 20/12/19.
 //  Copyright © 2019 Nomad Agency. All rights reserved.
 //
-
 import MapKit
 
 class LocAnnotation: NSObject, MKAnnotation {
