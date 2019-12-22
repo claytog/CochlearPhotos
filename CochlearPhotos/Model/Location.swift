@@ -9,21 +9,30 @@ import Foundation
 import GRDB
 
 // MARK: - Location
+
+enum LocType:String {
+    
+    case deflt = "default"
+    case custom = "custom"
+}
+
 class Location: Codable {
     
-    let name: String!
-    let lat: Double!
-    let lng: Double!
+    var name: String!
+    var lat: Double!
+    var lng: Double!
     
-    let locType: String?
-    let notes: String?
+    var locType: String?
+    var notes: String?
+    var dateUpdated: Double?
     
     init(){
         name = ""
         lat = 0.0
         lng = 0.0
-        locType = ""
+        locType = LocType.deflt.rawValue
         notes = ""
+        dateUpdated = Util.getEpoch()
     }
 }
 extension Location: FetchableRecord, PersistableRecord  {
@@ -32,12 +41,33 @@ extension Location: FetchableRecord, PersistableRecord  {
         
         do{
             for location in locationList {
-                
+                location.locType = LocType.deflt.rawValue
                 try DBManager.shared.dbMethod.write { db in
                     
                     try location.insert(db)
                 }
             }
+        }catch{
+            print(error.localizedDescription)
+        }
+    }
+    
+    class func updateLocation(location: Location){
+        
+        do{
+            
+            try DBManager.shared.dbMethod.write { db in
+                
+               try db.execute(sql: "REPLACE INTO location VALUES (?,?,?,?,?,?)",
+                arguments: [location.name,
+                            location.lat,
+                            location.lng,
+                            location.locType,
+                            location.notes,
+                            Util.getEpoch()]
+                )
+            }
+            
         }catch{
             print(error.localizedDescription)
         }

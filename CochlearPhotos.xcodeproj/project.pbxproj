@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		00598202DA871122837C3212 /* Pods_CochlearPhotos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A765F85D270C5477E32A7C /* Pods_CochlearPhotos.framework */; };
+		6902B01A23AF2412007BD943 /* LocDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6902B01923AF2412007BD943 /* LocDetailViewController.swift */; };
+		6902B02523AF3628007BD943 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6902B02423AF3628007BD943 /* Util.swift */; };
 		6981941A23ACA2A40029821F /* LocationsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981941923ACA2A40029821F /* LocationsAPI.swift */; };
 		6981941C23ACA37F0029821F /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981941B23ACA37F0029821F /* Plist.swift */; };
 		6981941E23ACA3C10029821F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981941D23ACA3C10029821F /* API.swift */; };
@@ -20,7 +22,7 @@
 		6981943223ACDDB20029821F /* LocAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6981943123ACDDB20029821F /* LocAnnotation.swift */; };
 		699A2EDC23AC9F4000537FDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A2EDB23AC9F4000537FDF /* AppDelegate.swift */; };
 		699A2EDE23AC9F4000537FDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A2EDD23AC9F4000537FDF /* SceneDelegate.swift */; };
-		699A2EE023AC9F4000537FDF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A2EDF23AC9F4000537FDF /* ViewController.swift */; };
+		699A2EE023AC9F4000537FDF /* LocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A2EDF23AC9F4000537FDF /* LocViewController.swift */; };
 		699A2EE323AC9F4000537FDF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 699A2EE123AC9F4000537FDF /* Main.storyboard */; };
 		699A2EE523AC9F4200537FDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 699A2EE423AC9F4200537FDF /* Assets.xcassets */; };
 		699A2EE823AC9F4200537FDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 699A2EE623AC9F4200537FDF /* LaunchScreen.storyboard */; };
@@ -28,6 +30,8 @@
 
 /* Begin PBXFileReference section */
 		22A765F85D270C5477E32A7C /* Pods_CochlearPhotos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CochlearPhotos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6902B01923AF2412007BD943 /* LocDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocDetailViewController.swift; sourceTree = "<group>"; };
+		6902B02423AF3628007BD943 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		6981941923ACA2A40029821F /* LocationsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsAPI.swift; sourceTree = "<group>"; };
 		6981941B23ACA37F0029821F /* Plist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plist.swift; sourceTree = "<group>"; };
 		6981941D23ACA3C10029821F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -41,7 +45,7 @@
 		699A2ED823AC9F4000537FDF /* CochlearPhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CochlearPhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		699A2EDB23AC9F4000537FDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		699A2EDD23AC9F4000537FDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		699A2EDF23AC9F4000537FDF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		699A2EDF23AC9F4000537FDF /* LocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocViewController.swift; sourceTree = "<group>"; };
 		699A2EE223AC9F4000537FDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		699A2EE423AC9F4200537FDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		699A2EE723AC9F4200537FDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				6981941B23ACA37F0029821F /* Plist.swift */,
+				6902B02423AF3628007BD943 /* Util.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -101,7 +106,8 @@
 		6981942723ACABAF0029821F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				699A2EDF23AC9F4000537FDF /* ViewController.swift */,
+				6902B01923AF2412007BD943 /* LocDetailViewController.swift */,
+				699A2EDF23AC9F4000537FDF /* LocViewController.swift */,
 				6981943123ACDDB20029821F /* LocAnnotation.swift */,
 			);
 			path = ViewControllers;
@@ -144,9 +150,9 @@
 				6981942823ACC6070029821F /* Model */,
 				6981942523ACAB370029821F /* Service */,
 				699A2EDB23AC9F4000537FDF /* AppDelegate.swift */,
-				699A2EDD23AC9F4000537FDF /* SceneDelegate.swift */,
-				699A2EE123AC9F4000537FDF /* Main.storyboard */,
 				699A2EE423AC9F4200537FDF /* Assets.xcassets */,
+				699A2EE123AC9F4000537FDF /* Main.storyboard */,
+				699A2EDD23AC9F4000537FDF /* SceneDelegate.swift */,
 				699A2EE623AC9F4200537FDF /* LaunchScreen.storyboard */,
 				699A2EE923AC9F4200537FDF /* Info.plist */,
 			);
@@ -271,13 +277,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6981941C23ACA37F0029821F /* Plist.swift in Sources */,
-				699A2EE023AC9F4000537FDF /* ViewController.swift in Sources */,
+				699A2EE023AC9F4000537FDF /* LocViewController.swift in Sources */,
 				6981943223ACDDB20029821F /* LocAnnotation.swift in Sources */,
 				699A2EDC23AC9F4000537FDF /* AppDelegate.swift in Sources */,
 				699A2EDE23AC9F4000537FDF /* SceneDelegate.swift in Sources */,
 				6981942E23ACC7840029821F /* DBManager.swift in Sources */,
 				6981943023ACC8080029821F /* Location.swift in Sources */,
+				6902B02523AF3628007BD943 /* Util.swift in Sources */,
 				6981941E23ACA3C10029821F /* API.swift in Sources */,
+				6902B01A23AF2412007BD943 /* LocDetailViewController.swift in Sources */,
 				6981941A23ACA2A40029821F /* LocationsAPI.swift in Sources */,
 				6981942223ACA68C0029821F /* LocationList.swift in Sources */,
 				6981942423ACAA4F0029821F /* ParseJSON.swift in Sources */,

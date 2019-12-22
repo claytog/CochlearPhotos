@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController {
+class LocViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -106,15 +106,18 @@ class ViewController: UIViewController {
         }
     }
     
-    func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == locationDetailSegue {
-
+            if let locDetailViewController = segue.destination as? LocDetailViewController {
+                
+                locDetailViewController.selectedLocation = sender as? Location
+            }
         }
     }
     
     
 }
-extension ViewController: MKMapViewDelegate {
+extension LocViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard let annotation = annotation as? LocAnnotation else { return nil }
         let identifier = "marker"
@@ -145,7 +148,7 @@ extension ViewController: MKMapViewDelegate {
     }
 }
 
-extension ViewController:  UITableViewDataSource, UITableViewDelegate {
+extension LocViewController:  UITableViewDataSource, UITableViewDelegate {
     
     func setupLocTableView() {
 
@@ -203,12 +206,14 @@ extension ViewController:  UITableViewDataSource, UITableViewDelegate {
         
         let loc = locList[indexPath.section]
         
-        performSegue(withIdentifier: locationDetailSegue, sender: nil)
+        performSegue(withIdentifier: locationDetailSegue, sender: loc)
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90.0
     }
+    
+    
     
 }
