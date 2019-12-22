@@ -33,7 +33,7 @@ class LocViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mapViewHeight = self.view.frame.height
+        
         mapView.delegate = self
         // Do any additional setup after loading the view.
         if DBManager.shared.openOrCopyDatabase() { // initialise a singleton instance of the database
@@ -51,14 +51,15 @@ class LocViewController: UIViewController {
                 mapView.setRegion(region, animated: true)
             }
         }
-        mapListHeightConstraint.constant = mapViewHeight - mapGap
-        mapGapBottom = mapViewHeight - mapGap
-        print (mapGapBottom!)
-        
-        setupLocTableView()
         
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setupLocTableView()
+        
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -73,7 +74,12 @@ class LocViewController: UIViewController {
         }
     }
    
-
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+           
+           setupLocTableView()
+    }
+    
+    
     @IBAction func didPanMapListView(_ sender: UIPanGestureRecognizer) {
         
         let translation = sender.translation(in: view)
@@ -151,7 +157,10 @@ extension LocViewController: MKMapViewDelegate {
 extension LocViewController:  UITableViewDataSource, UITableViewDelegate {
     
     func setupLocTableView() {
-
+        mapViewHeight = self.view.frame.height
+        mapListHeightConstraint.constant = mapViewHeight - mapGap
+        mapGapBottom = mapViewHeight - mapGap
+        
         locList = Location.getAll() ?? [Location]()
         
         locTableView.delegate = self

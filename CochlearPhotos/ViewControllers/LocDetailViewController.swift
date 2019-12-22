@@ -10,15 +10,8 @@ import UIKit
 
 class LocDetailViewController: UIViewController {
 
-    @IBOutlet weak var locScrollView: UIScrollView!
-    
     @IBOutlet weak var locNameTextField: UITextField!
-    
     @IBOutlet weak var locNotesTextView: UITextView!
-    
-    
-    @IBOutlet weak var locScrollViewHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var locNotesHeightConstraint: NSLayoutConstraint!
     
     var selectedLocation: Location!
@@ -88,10 +81,6 @@ class LocDetailViewController: UIViewController {
             
         
     }
-    
-    override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
-           self.locNotesTextView.alpha = 0
-       }
 
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
            
@@ -100,21 +89,11 @@ class LocDetailViewController: UIViewController {
     
     func adjustViewSize(forKeyboard: Bool){
         
-        let heightToChange = self.locScrollView.frame.height - (forKeyboard ? keyboardHeight : 0)
-        locScrollViewHeightConstraint.constant = heightToChange
+        let heightToChange = self.locNotesTextView.frame.height - (forKeyboard ? keyboardHeight : 0)
         locNotesHeightConstraint.constant = heightToChange
         locNotesTextView.isScrollEnabled = true
     }
-    /*
-    func fullView(){
-         
-        let heightToChange = self.locScrollView.frame.height
-        locScrollViewHeightConstraint.constant = heightToChange
-        locNotesHeightConstraint.constant = heightToChange
-        locNotesTextView.isScrollEnabled = true
-         
-     }
- */
+  
     
     @IBAction func didTapNotesTextView(_ sender: UITapGestureRecognizer) {
         

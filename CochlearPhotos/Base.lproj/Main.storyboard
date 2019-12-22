@@ -104,56 +104,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M2w-pN-OKt">
-                                <rect key="frame" x="20" y="108" width="374" height="34"/>
+                                <rect key="frame" x="20" y="108" width="374" height="41"/>
                                 <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="CTK-8K-zG8"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="pc7-eG-qYD" appends="YES" id="XFk-Xa-cnC"/>
                                 </connections>
                             </textField>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="59w-cf-j65">
-                                <rect key="frame" x="0.0" y="162" width="414" height="707"/>
-                                <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sB1-QG-znU">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="707"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="707" id="jO5-qS-jua"/>
-                                        </constraints>
-                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="Jks-bT-L0Z" appends="YES" id="ZG4-9Z-ttl"/>
-                                        </connections>
-                                    </textView>
-                                </subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sB1-QG-znU">
+                                <rect key="frame" x="20" y="169" width="374" height="707"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="sB1-QG-znU" firstAttribute="bottom" secondItem="C9r-5n-yAS" secondAttribute="bottom" id="55L-JW-Ib8"/>
-                                    <constraint firstAttribute="bottom" secondItem="sB1-QG-znU" secondAttribute="bottom" id="9Q5-B5-lGm"/>
-                                    <constraint firstAttribute="height" constant="707" id="9iT-1t-VPb"/>
-                                    <constraint firstItem="sB1-QG-znU" firstAttribute="leading" secondItem="C9r-5n-yAS" secondAttribute="leading" constant="20" id="Oww-Vn-Qux"/>
-                                    <constraint firstAttribute="trailing" secondItem="sB1-QG-znU" secondAttribute="trailing" constant="20" id="SuG-IS-ksN"/>
-                                    <constraint firstItem="sB1-QG-znU" firstAttribute="centerX" secondItem="59w-cf-j65" secondAttribute="centerX" id="jAf-Zl-NJa"/>
-                                    <constraint firstItem="sB1-QG-znU" firstAttribute="top" secondItem="C9r-5n-yAS" secondAttribute="top" id="nio-Gw-CKP"/>
+                                    <constraint firstAttribute="height" constant="707" id="jO5-qS-jua"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="PV5-Cc-lx3"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="C9r-5n-yAS"/>
-                            </scrollView>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Jks-bT-L0Z" appends="YES" id="ZG4-9Z-ttl"/>
+                                </connections>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="59w-cf-j65" firstAttribute="trailing" secondItem="mwj-Lg-A4h" secondAttribute="trailing" id="Aci-1p-pCf"/>
-                            <constraint firstItem="59w-cf-j65" firstAttribute="top" secondItem="M2w-pN-OKt" secondAttribute="bottom" constant="20" id="Fzk-3N-Y4r"/>
-                            <constraint firstItem="59w-cf-j65" firstAttribute="centerX" secondItem="opH-e0-f3t" secondAttribute="centerX" id="Jm4-jR-yaA"/>
+                            <constraint firstItem="sB1-QG-znU" firstAttribute="leading" secondItem="M2w-pN-OKt" secondAttribute="leading" id="1dg-Xc-MaY"/>
                             <constraint firstItem="mwj-Lg-A4h" firstAttribute="trailing" secondItem="M2w-pN-OKt" secondAttribute="trailing" constant="20" id="KF6-wc-UI6"/>
                             <constraint firstItem="M2w-pN-OKt" firstAttribute="top" secondItem="mwj-Lg-A4h" secondAttribute="top" constant="20" id="Mcr-jx-jKs"/>
+                            <constraint firstItem="sB1-QG-znU" firstAttribute="top" secondItem="M2w-pN-OKt" secondAttribute="bottom" constant="20" id="PRJ-GE-TIQ"/>
                             <constraint firstItem="M2w-pN-OKt" firstAttribute="leading" secondItem="mwj-Lg-A4h" secondAttribute="leading" constant="20" id="fXv-3r-FvG"/>
-                            <constraint firstItem="59w-cf-j65" firstAttribute="centerX" secondItem="M2w-pN-OKt" secondAttribute="centerX" id="tFn-w9-3AU"/>
-                            <constraint firstItem="59w-cf-j65" firstAttribute="leading" secondItem="mwj-Lg-A4h" secondAttribute="leading" id="vjS-KU-Q3W"/>
-                            <constraint firstItem="mwj-Lg-A4h" firstAttribute="bottom" secondItem="59w-cf-j65" secondAttribute="bottom" priority="250" constant="-7" id="z7G-nm-glj"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="sB1-QG-znU" secondAttribute="bottom" constant="20" id="oNW-LM-BQN"/>
+                            <constraint firstItem="sB1-QG-znU" firstAttribute="trailing" secondItem="M2w-pN-OKt" secondAttribute="trailing" id="zQf-4w-hxW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mwj-Lg-A4h"/>
                     </view>
@@ -162,8 +147,6 @@
                         <outlet property="locNameTextField" destination="M2w-pN-OKt" id="G4R-UK-Kxx"/>
                         <outlet property="locNotesHeightConstraint" destination="jO5-qS-jua" id="7eF-mZ-Y4u"/>
                         <outlet property="locNotesTextView" destination="sB1-QG-znU" id="WSf-Mh-2fl"/>
-                        <outlet property="locScrollView" destination="59w-cf-j65" id="4JJ-pI-fuc"/>
-                        <outlet property="locScrollViewHeightConstraint" destination="9iT-1t-VPb" id="zeb-U2-OtI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PRG-2v-WJ2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
