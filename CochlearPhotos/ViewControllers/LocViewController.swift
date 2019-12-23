@@ -40,7 +40,7 @@ class LocViewController: UIViewController {
             let locationList: [Location] = Location.getAll()!
         
             for location in locationList {
-            let locationCL = CLLocationCoordinate2D(latitude: location.lat, longitude: location.lng)
+                let locationCL = CLLocationCoordinate2D(latitude: location.lat, longitude: location.lng)
                 let locAnnotation = LocAnnotation(title: location.name,
                   locationName: location.name,
                   locationType: location.locType ?? "",
@@ -122,36 +122,69 @@ class LocViewController: UIViewController {
     }
     
     
+    @IBAction func didLongPressMapView(_ sender: UILongPressGestureRecognizer) {
+        
+        let touchPoint = sender.location(in: mapView)
+        let newCoordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = newCoordinates
+        mapView.addAnnotation(annotation)
+        
+        
+    }
+    
 }
 extension LocViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard let annotation = annotation as? LocAnnotation else { return nil }
         let identifier = "marker"
         var view: MKMarkerAnnotationView
+        
         if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView {
             dequeuedView.annotation = annotation
             view = dequeuedView
         } else {
             view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            view.canShowCallout = true
+            view.canShowCallout = false
             view.calloutOffset = CGPoint(x: -5, y: 5)
             view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         return view
     }
-    
+    /*
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         let ann = view.annotation as! LocAnnotation
-        let placeName = ann.title
+        let placeName = ann.title!
 
-        print(placeName)
-      /*
-        let ac = UIAlertController(title: placeName, message: placeInfo, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
- */
+        if let loc = Location.get(name: placeName) {
+            performSegue(withIdentifier: locationDetailSegue, sender: loc)
+        }
+*/
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        let name = view.annotation?.title
+        
+        if name == nil { // new custom pin
+            let customPin = view.annotation?.coordinate
+      //      var loc :LocAnnotation = LocAnnotation(title: <#T##String#>, locationName: <#T##String#>, locationType: <#T##String#>, coordinate: <#T##CLLocationCoordinate2D#>)
+        }else{
+            
+            let ann = view.annotation as! LocAnnotation
+              let placeName = ann.title!
+
+              if let loc = Location.get(name: placeName) {
+              
+                  performSegue(withIdentifier: locationDetailSegue, sender: loc)
+              }
+        }
+        
+        
+        
+  
+        //Pin clicked, do your stuff here
     }
+    
 }
 
 extension LocViewController:  UITableViewDataSource, UITableViewDelegate {
@@ -166,6 +199,7 @@ extension LocViewController:  UITableViewDataSource, UITableViewDelegate {
         locTableView.delegate = self
         locTableView.dataSource = self
         locTableView.tableFooterView = UIView()
+        mapView.delegate = self
         
         locTableView.reloadData()
     }

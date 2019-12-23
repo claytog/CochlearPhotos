@@ -17,6 +17,10 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="X8V-9r-e6l">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="3OX-ek-klL" appends="YES" id="4Pr-cJ-d7B"/>
+                                </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FnG-ZL-OA4">
                                 <rect key="frame" x="0.0" y="125" width="414" height="771"/>
@@ -92,6 +96,11 @@
                         <action selector="didPanMapListView:" destination="BYZ-38-t0r" id="9cp-a5-LdV"/>
                     </connections>
                 </panGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="3OX-ek-klL">
+                    <connections>
+                        <action selector="didLongPressMapView:" destination="BYZ-38-t0r" id="pZQ-9f-fFh"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="102.45535714285714"/>
         </scene>
