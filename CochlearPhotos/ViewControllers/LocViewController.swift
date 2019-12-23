@@ -37,41 +37,31 @@ class LocViewController: UIViewController {
         mapView.delegate = self
         // Do any additional setup after loading the view.
         if DBManager.shared.openOrCopyDatabase() { // initialise a singleton instance of the database
-            let locationList: [Location] = Location.getAll()!
-        
-            for location in locationList {
-                let locationCL = CLLocationCoordinate2D(latitude: location.lat, longitude: location.lng)
-                let locAnnotation = LocAnnotation(title: location.name,
-                  locationName: location.name,
-                  locationType: location.locType ?? "",
-                  coordinate: locationCL)
-                mapView.addAnnotation(locAnnotation)
-                let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-                let region = MKCoordinateRegion(center: locationCL, span: span)
-                mapView.setRegion(region, animated: true)
-            }
+            
+             LocationsAPI.get( completion: { locationsResponse in
+                                  //   self.weatherResponse = weatherResponse
+                                  print ("\n**** CONTENT DONLOADED, opening storyboard ***\n")
+                                  print (locationsResponse)
+                           //    self.annotateLocationList()
+                               self.setupLocTableView()
+                
+            })
+            
+            
         }
+        
         
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setupLocTableView()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if DBManager.shared.openOrCopyDatabase() { // initialise a singleton instance of the database
-            
-            LocationsAPI.get( completion: { locationsResponse in
-                //   self.weatherResponse = weatherResponse
-                print ("\n**** CONTENT DONLOADED, opening storyboard ***\n")
-                print (locationsResponse)
-             
-            })
-        }
+        self.setupLocTableView()
+       
     }
    
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
@@ -115,7 +105,6 @@ class LocViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == locationDetailSegue {
             if let locDetailViewController = segue.destination as? LocDetailViewController {
-                
                 locDetailViewController.selectedLocation = sender as? Location
             }
         }
@@ -131,6 +120,27 @@ class LocViewController: UIViewController {
         mapView.addAnnotation(annotation)
         
         
+    }
+    
+    func annotateLocationList(){
+        
+        for annotation in mapView.annotations{
+            mapView.removeAnnotation(annotation)
+        }
+        
+        let locationList: [Location] = Location.getAll()!
+        
+            for location in locationList {
+                let locationCL = CLLocationCoordinate2D(latitude: location.lat, longitude: location.lng)
+                let locAnnotation = LocAnnotation(title: location.name,
+                  locationName: location.name,
+                  locationType: location.locType ?? "",
+                  coordinate: locationCL)
+                mapView.addAnnotation(locAnnotation)
+                let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                let region = MKCoordinateRegion(center: locationCL, span: span)
+                mapView.setRegion(region, animated: true)
+            }
     }
     
 }
@@ -163,24 +173,24 @@ extension LocViewController: MKMapViewDelegate {
 */
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
+        let loc:Location!
+        
         let name = view.annotation?.title
         
-        if name == nil { // new custom pin
-            let customPin = view.annotation?.coordinate
-      //      var loc :LocAnnotation = LocAnnotation(title: <#T##String#>, locationName: <#T##String#>, locationType: <#T##String#>, coordinate: <#T##CLLocationCoordinate2D#>)
-        }else{
-            
+        if name is String { // new custom pin
             let ann = view.annotation as! LocAnnotation
-              let placeName = ann.title!
-
-              if let loc = Location.get(name: placeName) {
-              
-                  performSegue(withIdentifier: locationDetailSegue, sender: loc)
-              }
+            let placeName = ann.title!
+            loc = Location.get(name: placeName)
+        }else{
+            let customPin = view.annotation?.coordinate
+            loc = Location()
+            loc.locType = LocType.custom.rawValue
+            loc.lat = customPin?.latitude
+            loc.lng = customPin?.longitude
         }
-        
-        
-        
+        if loc != nil {
+            performSegue(withIdentifier: locationDetailSegue, sender: loc)
+        }
   
         //Pin clicked, do your stuff here
     }
@@ -195,6 +205,8 @@ extension LocViewController:  UITableViewDataSource, UITableViewDelegate {
         mapGapBottom = mapViewHeight - mapGap
         
         locList = Location.getAll() ?? [Location]()
+
+        print(locList.count)
         
         locTableView.delegate = self
         locTableView.dataSource = self
@@ -202,6 +214,8 @@ extension LocViewController:  UITableViewDataSource, UITableViewDelegate {
         mapView.delegate = self
         
         locTableView.reloadData()
+        
+        self.annotateLocationList()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

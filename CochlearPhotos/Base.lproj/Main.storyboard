@@ -124,7 +124,7 @@
                                     <outletCollection property="gestureRecognizers" destination="pc7-eG-qYD" appends="YES" id="XFk-Xa-cnC"/>
                                 </connections>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sB1-QG-znU">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sB1-QG-znU">
                                 <rect key="frame" x="20" y="169" width="374" height="707"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <gestureRecognizers/>

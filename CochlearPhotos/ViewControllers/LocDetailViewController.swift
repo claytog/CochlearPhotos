@@ -16,8 +16,9 @@ class LocDetailViewController: UIViewController {
     
     var selectedLocation: Location!
     
-    var keyboardHeight : CGFloat = 0
+    var isNew: Bool!
     var isDefault: Bool!
+    var keyboardShowing: Bool! = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,22 +32,21 @@ class LocDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
 
-        isEditing = selectedLocation.name != nil
-
-        self.title = "Location"
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        adjustViewSize(forKeyboard: false)
+        adjustViewSize()
         
     }
     
     func setupView(){
         
+        self.title = "Location"
+        isNew = selectedLocation.name == ""
+        isEditing = isNew
         isDefault = selectedLocation.locType == LocType.deflt.rawValue
-        
         NotificationCenter.default.addObserver(self, selector: #selector(LocDetailViewController.keyboardWillDisappear(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),name: UIResponder.keyboardWillShowNotification,object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),name: UIResponder.keyboardWillHideNotification,object: nil)
@@ -56,57 +56,67 @@ class LocDetailViewController: UIViewController {
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
-            keyboardHeight = keyboardRectangle.height
-            
-            adjustViewSize(forKeyboard: true)
+
+            adjustViewSize(forKeyboard: keyboardRectangle.height)
+            keyboardShowing = true
         }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
-            keyboardHeight = keyboardRectangle.height
             
-            adjustViewSize(forKeyboard: false)
+            adjustViewSize(forKeyboard: -keyboardRectangle.height)
+            keyboardShowing = false
         }
     }
     
     @objc func keyboardWillDisappear(_: NSNotification){
         // save the reflection
 
+        if !isDefault {
+            selectedLocation.name = locNameTextField.text
+        }
         selectedLocation.notes = locNotesTextView.text
-        
-        Location.updateLocation(location: selectedLocation)
-            
+        if isNew {
+            if selectedLocation.name != "" {
+                Location.insertLocation(location: selectedLocation)
+            }
+        }else{
+            Location.updateLocation(location: selectedLocation)
+        }
             
         
     }
 
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
            
-           adjustViewSize(forKeyboard: false)
+           adjustViewSize()
     }
     
-    func adjustViewSize(forKeyboard: Bool){
-        
-        let heightToChange = self.locNotesTextView.frame.height - (forKeyboard ? keyboardHeight : 0)
+    func adjustViewSize(forKeyboard: CGFloat = 0){
+        var heightToChange:CGFloat = 0
+        if keyboardShowing {
+            heightToChange = self.locNotesTextView.frame.height
+        }else{
+             heightToChange = self.locNotesTextView.frame.height - forKeyboard
+        }
         locNotesHeightConstraint.constant = heightToChange
-        locNotesTextView.isScrollEnabled = true
     }
   
     
+    @IBAction func didTapNameTextField(_ sender: UITapGestureRecognizer) {
+        isEditing = true
+        setupNameTextField()
+    }
+    
     @IBAction func didTapNotesTextView(_ sender: UITapGestureRecognizer) {
-        
         isEditing = true
         setupNotesTextView()
         
     }
     
-    @IBAction func didTapNameTextField(_ sender: UITapGestureRecognizer) {
-        
-        isEditing = true
-        setupNameTextField()
-    }
+
     
 }
 
@@ -127,9 +137,8 @@ extension LocDetailViewController : UITextFieldDelegate {
                 locNameTextField.backgroundColor = UIColor.white;
                 locNameTextField.layer.borderWidth = 1
                 locNameTextField.layer.borderColor = UIColor.black.cgColor
-                if locNameTextField.text == "" {
-                    locNameTextField.becomeFirstResponder()
-                }
+                locNameTextField.becomeFirstResponder()
+                
             }else{
                 
             }
@@ -145,14 +154,14 @@ extension LocDetailViewController : UITextViewDelegate {
         
         locNotesTextView.text = selectedLocation.notes
         if isEditing {
-            locNotesTextView.delegate = self
+            
             locNameTextField.isUserInteractionEnabled = true
             locNotesTextView.layer.borderWidth = 1
             locNotesTextView.layer.borderColor = UIColor.black.cgColor
             locNotesTextView.isEditable = true
-            if locNameTextField.text != "" {
+         //   if locNameTextField.text != "" {
                 locNotesTextView.becomeFirstResponder()
-            }
+           // }
         }else{
             locNotesTextView.backgroundColor = UIColor.systemGroupedBackground
             locNotesTextView.isEditable = false

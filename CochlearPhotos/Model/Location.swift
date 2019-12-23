@@ -58,13 +58,11 @@ extension Location: FetchableRecord, PersistableRecord  {
             
             try DBManager.shared.dbMethod.write { db in
                 
-               try db.execute(sql: "REPLACE INTO location VALUES (?,?,?,?,?,?)",
+               try db.execute(sql: "UPDATE location SET name=?, notes=?, dateUpdated=? WHERE name=?",
                 arguments: [location.name,
-                            location.lat,
-                            location.lng,
-                            location.locType,
                             location.notes,
-                            Util.getEpoch()]
+                            Util.getEpoch(),
+                            location.name]
                 )
             }
             
@@ -72,6 +70,30 @@ extension Location: FetchableRecord, PersistableRecord  {
             print(error.localizedDescription)
         }
     }
+    
+    class func insertLocation(location: Location){
+        
+        do{
+            
+            try DBManager.shared.dbMethod.write { db in
+                
+                try db.execute(sql: "REPLACE INTO location VALUES (?,?,?,?,?,?)",
+                      arguments: [location.name,
+                                  location.lat,
+                                  location.lng,
+                                  location.locType,
+                                  location.notes,
+                                  Util.getEpoch()]
+                      )
+            }
+            
+        }catch{
+            print(error.localizedDescription)
+        }
+    }
+    
+    
+    
     
     class func get(name: String)->Location!{
         
