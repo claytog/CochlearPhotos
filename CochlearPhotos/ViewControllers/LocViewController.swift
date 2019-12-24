@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class LocViewController: UIViewController {
     
@@ -30,9 +31,12 @@ class LocViewController: UIViewController {
     
     var locList: [Location] = []
     
+    let locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setCurrentLocation()
         
         mapView.delegate = self
         // Do any additional setup after loading the view.
@@ -40,16 +44,14 @@ class LocViewController: UIViewController {
             
              LocationsAPI.get( completion: { locationsResponse in
                                   //   self.weatherResponse = weatherResponse
-                                  print ("\n**** CONTENT DONLOADED, opening storyboard ***\n")
-                                  print (locationsResponse)
-                           //    self.annotateLocationList()
-                               self.setupLocTableView()
+                print ("\n**** CONTENT DONLOADED, opening storyboard ***\n")
+                self.setupLocTableView()
                 
             })
             
             
         }
-        
+
         
     }
 
@@ -142,6 +144,8 @@ class LocViewController: UIViewController {
                 mapView.setRegion(region, animated: true)
             }
     }
+    
+    
     
 }
 extension LocViewController: MKMapViewDelegate {
@@ -272,5 +276,36 @@ extension LocViewController:  UITableViewDataSource, UITableViewDelegate {
     }
     
     
+    
+}
+extension LocViewController: CLLocationManagerDelegate {
+    
+    func setCurrentLocation(){
+
+
+        // For use in foreground
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
+
+        mapView.delegate = self
+        mapView.mapType = .standard
+        mapView.isZoomEnabled = true
+        mapView.isScrollEnabled = true
+
+        mapView.showsUserLocation = true
+       
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+         locationManager.stopUpdatingLocation()
+
+    }
     
 }
