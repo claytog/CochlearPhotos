@@ -29,16 +29,10 @@ class LocDetailViewController: UIViewController {
 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         adjustViewSize()
-        
     }
     
     func setupView(){
@@ -50,7 +44,6 @@ class LocDetailViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(LocDetailViewController.keyboardWillDisappear(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),name: UIResponder.keyboardWillShowNotification,object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),name: UIResponder.keyboardWillHideNotification,object: nil)
-        
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
@@ -85,8 +78,6 @@ class LocDetailViewController: UIViewController {
         }else{
             Location.updateLocation(location: selectedLocation)
         }
-            
-        
     }
 
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
@@ -113,10 +104,7 @@ class LocDetailViewController: UIViewController {
     @IBAction func didTapNotesTextView(_ sender: UITapGestureRecognizer) {
         isEditing = true
         setupNotesTextView()
-        
     }
-    
-
     
 }
 
@@ -139,11 +127,8 @@ extension LocDetailViewController : UITextFieldDelegate {
                 locNameTextField.layer.borderColor = UIColor.black.cgColor
                 locNameTextField.becomeFirstResponder()
                 
-            }else{
-                
             }
         }
-        
     }
 
 }
@@ -160,7 +145,7 @@ extension LocDetailViewController : UITextViewDelegate {
             locNotesTextView.layer.borderColor = UIColor.black.cgColor
             locNotesTextView.isEditable = true
          //   if locNameTextField.text != "" {
-                locNotesTextView.becomeFirstResponder()
+            locNotesTextView.becomeFirstResponder()
            // }
         }else{
             locNotesTextView.backgroundColor = UIColor.systemGroupedBackground

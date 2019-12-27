@@ -35,14 +35,30 @@
                                         <rect key="frame" x="0.0" y="64" width="414" height="707"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="locCell" id="Nhr-GP-siy">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="locCell" textLabel="WEP-Bi-oLa" detailTextLabel="W9R-YZ-Ngx" style="IBUITableViewCellStyleSubtitle" id="Nhr-GP-siy">
+                                                <rect key="frame" x="0.0" y="28" width="414" height="55.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nhr-GP-siy" id="wC0-2A-GyM">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WEP-Bi-oLa">
+                                                            <rect key="frame" x="20" y="10" width="33.5" height="20.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W9R-YZ-Ngx">
+                                                            <rect key="frame" x="20" y="31.5" width="44" height="14.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
                                                 </tableViewCellContentView>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </tableViewCell>
                                         </prototypes>
                                         <connections>
@@ -50,14 +66,25 @@
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="wx6-fr-1rI"/>
                                         </connections>
                                     </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJ3-e3-gGE">
+                                        <rect key="frame" x="182" y="10" width="50" height="5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="5xq-C6-46V"/>
+                                            <constraint firstAttribute="height" constant="5" id="nxg-4H-3z1"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="panbar"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstItem="kJ3-e3-gGE" firstAttribute="centerX" secondItem="FnG-ZL-OA4" secondAttribute="centerX" id="03e-DL-rZ5"/>
+                                    <constraint firstItem="98N-gz-dWf" firstAttribute="top" secondItem="kJ3-e3-gGE" secondAttribute="bottom" constant="5" id="6Da-IG-l1c"/>
                                     <constraint firstAttribute="trailing" secondItem="q8g-Cj-kGd" secondAttribute="trailing" id="O32-Iv-lrm"/>
                                     <constraint firstItem="q8g-Cj-kGd" firstAttribute="top" secondItem="98N-gz-dWf" secondAttribute="bottom" constant="8" id="Oxf-6Q-gdo"/>
                                     <constraint firstItem="98N-gz-dWf" firstAttribute="centerX" secondItem="FnG-ZL-OA4" secondAttribute="centerX" id="QsK-GZ-Wxr"/>
                                     <constraint firstItem="q8g-Cj-kGd" firstAttribute="leading" secondItem="FnG-ZL-OA4" secondAttribute="leading" id="XUk-Pz-j6T"/>
+                                    <constraint firstItem="kJ3-e3-gGE" firstAttribute="top" secondItem="FnG-ZL-OA4" secondAttribute="top" constant="10" id="d8b-37-OXU"/>
                                     <constraint firstAttribute="bottom" secondItem="q8g-Cj-kGd" secondAttribute="bottom" id="ekC-Q6-Isw"/>
                                     <constraint firstItem="98N-gz-dWf" firstAttribute="top" secondItem="FnG-ZL-OA4" secondAttribute="top" constant="20" id="r9a-sU-eUm"/>
                                     <constraint firstAttribute="height" constant="771" id="rId-yE-3CN"/>
@@ -126,7 +153,6 @@
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sB1-QG-znU">
                                 <rect key="frame" x="20" y="169" width="374" height="707"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="707" id="jO5-qS-jua"/>
@@ -191,4 +217,7 @@
             <point key="canvasLocation" x="137.68115942028987" y="102.45535714285714"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="panbar" width="2036" height="380"/>
+    </resources>
 </document>
