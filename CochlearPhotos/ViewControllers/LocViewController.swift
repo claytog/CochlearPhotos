@@ -26,6 +26,8 @@ class LocViewController: UIViewController {
     var locViewOriginalCenter: CGPoint!
     var locViewOriginalY: CGFloat!
     
+    var locListHeightOrig: CGFloat!
+    
     let mapGap: CGFloat = 100
     var mapGapBottom: CGFloat!
     
@@ -38,10 +40,7 @@ class LocViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        locTableView.delegate = self
-        locTableView.dataSource = self
-        locTableView.tableFooterView = UIView()
-        mapView.delegate = self
+        initLocTable()
         
         setCurrentLocation()
         
@@ -68,6 +67,7 @@ class LocViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.setupLocTableView()
+        locListHeightOrig = mapListHeightConstraint.constant
     }
    
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
@@ -79,19 +79,19 @@ class LocViewController: UIViewController {
     @IBAction func didPanMapListView(_ sender: UIPanGestureRecognizer) {
         
         let translation = sender.translation(in: view)
-     //   print("translation \(translation)")
-        
+
         if sender.state == UIGestureRecognizer.State.began {
             locViewOriginalCenter = locationsView.center
             locViewOriginalY = locationsView.frame.origin.y
-         //   print(locationsView.frame.origin.y)
+   
         } else if sender.state == UIGestureRecognizer.State.changed {
-           // print(locationsView.frame.origin.y)
-            let newCentre = CGPoint(x: locViewOriginalCenter.x, y: locViewOriginalCenter.y + translation.y)
-        if locationsView.frame.origin.y >= mapGap && locationsView.frame.origin.y <= mapGapBottom {
-            locationsView.center = newCentre
-            }
+  
+            mapListHeightConstraint.constant = locListHeightOrig - translation.y
+          
         } else if sender.state == UIGestureRecognizer.State.ended {
+            
+            locListHeightOrig = mapListHeightConstraint.constant
+            
             if locationsView.frame.origin.y < mapGap {
                 UIView.animate(withDuration:1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options:[] ,
                 animations: { () -> Void in
@@ -108,6 +108,7 @@ class LocViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == locationDetailSegue {
             if let locDetailViewController = segue.destination as? LocDetailViewController {
                 locDetailViewController.selectedLocation = sender as? Location
@@ -123,6 +124,14 @@ class LocViewController: UIViewController {
         let annotation = MKPointAnnotation()
         annotation.coordinate = newCoordinates
         mapView.addAnnotation(annotation)
+    }
+    
+    func initLocTable(){
+        
+        locTableView.delegate = self
+        locTableView.dataSource = self
+        locTableView.tableFooterView = UIView()
+        mapView.delegate = self
     }
     
     func annotateLocationList(completion : @escaping (Bool)->()){
@@ -267,18 +276,6 @@ extension LocViewController:  UITableViewDataSource, UITableViewDelegate {
             }
             cell.detailTextLabel?.text = distanceString + unit
         }
-
-        /*
-        let imageView : UIImageView = UIImageView(frame:CGRect(x: 0, y: 0, width: 20, height: 20))
-        imageView.contentMode = .scaleAspectFit
-        if more.linkType == MoreNavigation.LinkType.EXTERNAL.rawValue {
-            imageView.image = UIImage(named:Imge.Card.Link.offsite)
-        }else if more.linkType == MoreNavigation.LinkType.SETTINGS.rawValue {
-            imageView.image = UIImage(named:Imge.Card.Link.offsite)
-        }
- */
-  //      cell.accessoryView = imageView
-        
         return cell
     }
     
