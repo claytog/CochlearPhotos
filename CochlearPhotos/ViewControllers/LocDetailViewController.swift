@@ -13,12 +13,17 @@ class LocDetailViewController: UIViewController {
     @IBOutlet weak var locNameTextField: UITextField!
     @IBOutlet weak var locNotesTextView: UITextView!
     @IBOutlet weak var locNotesHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var locNameHeightConstraint: NSLayoutConstraint!
     
     var selectedLocation: Location!
     
     var isNew: Bool!
     var isDefault: Bool!
     var keyboardShowing: Bool! = false
+    var nameHeight: CGFloat!
+    var origTextViewColr: UIColor!
+    var placeholderTextColr = UIColor.gray
+    let placeholderTextViewText = "Add notes"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +43,14 @@ class LocDetailViewController: UIViewController {
     func setupView(){
         
         self.title = "Location"
-        isNew = selectedLocation.name == ""
+        nameHeight = locNameHeightConstraint.constant
+        isNew = selectedLocation.name == nil
         isEditing = isNew
         isDefault = selectedLocation.locType == LocType.deflt.rawValue
+        
+        locNotesTextView.delegate = self
+        origTextViewColr = locNotesTextView.textColor
+        
         NotificationCenter.default.addObserver(self, selector: #selector(LocDetailViewController.keyboardWillDisappear(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),name: UIResponder.keyboardWillShowNotification,object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),name: UIResponder.keyboardWillHideNotification,object: nil)
@@ -70,9 +80,14 @@ class LocDetailViewController: UIViewController {
         if !isDefault {
             selectedLocation.name = locNameTextField.text
         }
-        selectedLocation.notes = locNotesTextView.text
+        if locNotesTextView.text.isEmpty {
+            locNotesTextView.text = placeholderTextViewText
+            locNotesTextView.textColor = placeholderTextColr
+        }else{
+            selectedLocation.notes = locNotesTextView.text
+        }
         if isNew {
-            if selectedLocation.name != "" {
+            if !selectedLocation.name.isEmpty {
                 Location.insertLocation(location: selectedLocation)
             }
         }else{
@@ -90,7 +105,10 @@ class LocDetailViewController: UIViewController {
         if keyboardShowing {
             heightToChange = self.locNotesTextView.frame.height
         }else{
-             heightToChange = self.locNotesTextView.frame.height - forKeyboard
+            heightToChange = self.view.frame.height - nameHeight - (forKeyboard+120)
+            if heightToChange < nameHeight {
+                heightToChange = nameHeight
+            }
         }
         locNotesHeightConstraint.constant = heightToChange
     }
@@ -139,17 +157,28 @@ extension LocDetailViewController : UITextViewDelegate {
         
         locNotesTextView.text = selectedLocation.notes
         if isEditing {
-            
             locNameTextField.isUserInteractionEnabled = true
             locNotesTextView.layer.borderWidth = 1
             locNotesTextView.layer.borderColor = UIColor.black.cgColor
             locNotesTextView.isEditable = true
-         //   if locNameTextField.text != "" {
             locNotesTextView.becomeFirstResponder()
-           // }
         }else{
             locNotesTextView.backgroundColor = UIColor.systemGroupedBackground
             locNotesTextView.isEditable = false
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == placeholderTextColr {
+            textView.text = nil
+            textView.textColor = origTextViewColr
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = placeholderTextViewText
+            textView.textColor = placeholderTextColr
         }
     }
     

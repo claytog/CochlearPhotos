@@ -21,14 +21,16 @@ class LocViewController: UIViewController {
     @IBOutlet weak var locTableView: UITableView!
     
     let locationDetailSegue = "locationDetailSegue"
+    let LOADED = "loaded"
     
     var mapViewHeight: CGFloat!
     var locViewOriginalCenter: CGPoint!
     var locViewOriginalY: CGFloat!
     
     var locListHeightOrig: CGFloat!
+    var locListHeightDef: CGFloat!
     
-    let mapGap: CGFloat = 100
+    let mapGap: CGFloat = 120
     var mapGapBottom: CGFloat!
     
     var locList: [Location] = []
@@ -37,8 +39,12 @@ class LocViewController: UIViewController {
     
     var selectedLoc: CLLocationCoordinate2D = CLLocationCoordinate2D()
     
+    var pressedLoc = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        pressedLoc = LOADED
         
         initLocTable()
         
@@ -59,20 +65,25 @@ class LocViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        locTableView.alpha = 0
+        
+        locTableView.alpha = 1
         locationManager.requestWhenInUseAuthorization()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.setupLocTableView()
+        
+        setupLocTableView()
+        pressedLoc = ""
         locListHeightOrig = mapListHeightConstraint.constant
+        
     }
    
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
            
-           setupLocTableView()
+        setupLocTableView()
+        setHeights()
     }
     
     
@@ -85,23 +96,27 @@ class LocViewController: UIViewController {
             locViewOriginalY = locationsView.frame.origin.y
    
         } else if sender.state == UIGestureRecognizer.State.changed {
-  
-            mapListHeightConstraint.constant = locListHeightOrig - translation.y
+            let newHeight = locListHeightOrig - translation.y
+            mapListHeightConstraint.constant = newHeight
           
         } else if sender.state == UIGestureRecognizer.State.ended {
             
             locListHeightOrig = mapListHeightConstraint.constant
             
             if locationsView.frame.origin.y < mapGap {
-                UIView.animate(withDuration:1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options:[] ,
+                UIView.animate(withDuration:0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options:[] ,
                 animations: { () -> Void in
                     self.locationsView.frame.origin.y = self.mapGap
+                    self.mapListHeightConstraint.constant = self.locListHeightDef
+                    self.locListHeightOrig = self.locListHeightDef
                 }, completion: nil)
                 
             }else if (locationsView.frame.origin.y > mapGapBottom ) {
-                UIView.animate(withDuration:1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options:[] ,
+                UIView.animate(withDuration:0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options:[] ,
                 animations: { () -> Void in
-                    self.locationsView.frame.origin.y = self.mapGapBottom
+                    self.locationsView.frame.origin.y = self.mapGapBottom + self.mapGap
+                    self.mapListHeightConstraint.constant = self.mapGap
+                    self.locListHeightOrig = self.mapGap
                 }, completion: nil)
             }
         }
@@ -118,12 +133,23 @@ class LocViewController: UIViewController {
     
     
     @IBAction func didLongPressMapView(_ sender: UILongPressGestureRecognizer) {
-        
+
         let touchPoint = sender.location(in: mapView)
         let newCoordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         let annotation = MKPointAnnotation()
         annotation.coordinate = newCoordinates
         mapView.addAnnotation(annotation)
+        
+        
+        let loc = Location(locType: LocType.custom, coordinate: annotation.coordinate)
+        selectedLoc = loc.toCL()
+        
+        let newPressedLoc = String(selectedLoc.latitude + selectedLoc.longitude)
+        if pressedLoc != newPressedLoc {
+            pressedLoc = newPressedLoc
+            performSegue(withIdentifier: locationDetailSegue, sender: loc)
+        }
+
     }
     
     func initLocTable(){
@@ -142,18 +168,14 @@ class LocViewController: UIViewController {
         
         let locationList: [Location] = Location.getAll()!
         
-        for location in locationList {
-            let locationCL = CLLocationCoordinate2D(latitude: location.lat, longitude: location.lng)
-            let locAnnotation = LocAnnotation(title: location.name,
-              locationName: location.name,
-              locationType: location.locType ?? "",
-              coordinate: locationCL)
-
+        for (index, location) in locationList.enumerated() {
+            let locAnnotation = location.toLocAnnotation()
             mapView.addAnnotation(locAnnotation)
             let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            let region = MKCoordinateRegion(center: locationCL, span: span)
-            mapView.setRegion(region, animated: true)
-            
+            if index == 0 && pressedLoc == LOADED {
+                let region = MKCoordinateRegion(center: locAnnotation.coordinate, span: span)
+                mapView.setRegion(region, animated: true)
+            }
             let distance: Double = locDistance(from: locAnnotation) ?? 0
             location.distance = distance
             Location.updateDistance(location: location)
@@ -161,8 +183,16 @@ class LocViewController: UIViewController {
         completion(true)
     }
     
+    @IBAction func currentLocation(_ sender: UIBarButtonItem) {
+        if let coor = mapView.userLocation.location?.coordinate{
+            mapView.setCenter(coor, animated: true)
+        }
+    }
+    
+    
 }
 extension LocViewController: MKMapViewDelegate {
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard let annotation = annotation as? LocAnnotation else { return nil }
         let identifier = "marker"
@@ -172,13 +202,16 @@ extension LocViewController: MKMapViewDelegate {
             dequeuedView.annotation = annotation
             view = dequeuedView
         } else {
+            
             view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             view.canShowCallout = false
             view.calloutOffset = CGPoint(x: -5, y: 5)
             view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+             
         }
         return view
     }
+ 
     /*
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
@@ -195,16 +228,12 @@ extension LocViewController: MKMapViewDelegate {
         
         let name = view.annotation?.title
         
-        if name is String { // new custom pin
+        if name is String {
             let ann = view.annotation as! LocAnnotation
             let placeName = ann.title!
             loc = Location.get(name: placeName)
         }else{
-            let customPin = view.annotation?.coordinate
-            loc = Location()
-            loc.locType = LocType.custom.rawValue
-            loc.lat = customPin?.latitude
-            loc.lng = customPin?.longitude
+            loc = Location(locType: LocType.custom, coordinate: view.annotation!.coordinate)
         }
         if loc != nil {
             selectedLoc = loc.toCL()
@@ -212,26 +241,32 @@ extension LocViewController: MKMapViewDelegate {
         }
     }
     
+    
 }
 
 extension LocViewController:  UITableViewDataSource, UITableViewDelegate {
     
     func setupLocTableView() {
-        mapViewHeight = self.view.frame.height
-        mapListHeightConstraint.constant = mapViewHeight - mapGap
-        mapGapBottom = mapViewHeight - mapGap
+        
+        locListHeightDef = self.view.frame.height - mapGap
         
         locList = Location.getAll() ?? [Location]()
 
         annotateLocationList(completion: { listDone in
             self.locList = Location.getAll() ?? [Location]()
             self.locTableView.reloadData()
-            self.locTableView.alpha = 1
         })
         
-        if selectedLoc.latitude != 0 {
-             mapView.setCenter(selectedLoc, animated: true)
+        if selectedLoc.latitude == 0 {
+            setHeights()
         }
+        
+    }
+    
+    func setHeights(){
+        mapViewHeight = self.view.frame.height
+        mapListHeightConstraint.constant = mapViewHeight - mapGap
+        mapGapBottom = mapViewHeight - mapGap
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

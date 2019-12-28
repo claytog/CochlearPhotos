@@ -35,14 +35,23 @@ class Location: Codable {
         distance = 0
         dateUpdated = Util.getEpoch()
     }
+    
+    init(locType: LocType, coordinate: CLLocationCoordinate2D){
+        self.locType = locType.rawValue
+        lat = coordinate.latitude
+        lng = coordinate.longitude
+    }
 }
 extension Location: FetchableRecord, PersistableRecord  {
     
     func toCL() -> CLLocationCoordinate2D {
         let latDeg: CLLocationDegrees = CLLocationDegrees(exactly: self.lat)!
         let lngDeg: CLLocationDegrees = CLLocationDegrees(exactly: self.lng)!
-        let showLocCLLocation: CLLocationCoordinate2D = CLLocationCoordinate2D.init(latitude: latDeg, longitude: lngDeg)
-        return showLocCLLocation
+        return CLLocationCoordinate2D.init(latitude: latDeg, longitude: lngDeg)
+    }
+    
+    func toLocAnnotation() -> LocAnnotation {
+        return LocAnnotation(title: name, locationName: name, locationType: locType!, coordinate: toCL())
     }
     
     class func insert(locationList: [Location]){
