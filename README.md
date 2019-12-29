@@ -22,6 +22,10 @@ CochlearPhotos uses two POD dependancies:
 * The app must include unit tests
 
 ## User Assumptions
+### iOS Version Support
+* Requires iOS 13.2
+* Requires iPad or iPhone.
+
 ### Location Services
 * Location Services must be enabled within iOS settings.
 * Upon initial use of the app, authorisation must be accepted for location services.
