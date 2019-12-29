@@ -107,14 +107,19 @@ class LocDetailViewController: UIViewController {
     }
     
     func setPlaceholder(){
-        if locNotesTextView.text.isEmpty {
-            locNotesTextView.text = placeholderTextViewText
+        if locNotesTextView.text.isEmpty || locNotesTextView.text == placeholderTextViewText {
+            if locNotesTextView.text.isEmpty {
+                locNotesTextView.text = placeholderTextViewText
+            }else if locNotesTextView.text == placeholderTextViewText{
+                if isEditing {
+                    locNotesTextView.text = ""
+                }
+            }
             locNotesTextView.textColor = placeholderTextColr
         }else{
             selectedLocation.notes = locNotesTextView.text
         }
     }
-  
     
     @IBAction func didTapNameTextField(_ sender: UITapGestureRecognizer) {
         isEditing = true
@@ -124,6 +129,7 @@ class LocDetailViewController: UIViewController {
     @IBAction func didTapNotesTextView(_ sender: UITapGestureRecognizer) {
         isEditing = true
         setupNotesTextView()
+        setPlaceholder()
     }
     
 }
