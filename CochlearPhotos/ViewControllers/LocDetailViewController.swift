@@ -73,8 +73,6 @@ class LocDetailViewController: UIViewController {
     }
     
     @objc func keyboardWillDisappear(_: NSNotification){
-        // save the reflection
-
         if !isDefault {
             selectedLocation.name = locNameTextField.text
         }
@@ -89,7 +87,6 @@ class LocDetailViewController: UIViewController {
     }
 
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-           
            adjustViewSize()
     }
     
@@ -110,12 +107,15 @@ class LocDetailViewController: UIViewController {
         if locNotesTextView.text.isEmpty || locNotesTextView.text == placeholderTextViewText {
             if locNotesTextView.text.isEmpty {
                 locNotesTextView.text = placeholderTextViewText
+                locNotesTextView.textColor = placeholderTextColr
             }else if locNotesTextView.text == placeholderTextViewText{
                 if isEditing {
                     locNotesTextView.text = ""
+                    locNotesTextView.textColor = origTextViewColr
                 }
+            }else{
+                locNotesTextView.textColor = placeholderTextColr
             }
-            locNotesTextView.textColor = placeholderTextColr
         }else{
             selectedLocation.notes = locNotesTextView.text
         }
@@ -186,6 +186,7 @@ extension LocDetailViewController : UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        selectedLocation.notes = textView.text
         if textView.text.isEmpty {
             textView.text = placeholderTextViewText
             textView.textColor = placeholderTextColr
