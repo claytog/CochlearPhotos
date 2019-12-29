@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jqs-Kk-CS7">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="8wW-hg-eye">
+            <objects>
+                <viewController storyboardIdentifier="MainViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="jqs-Kk-CS7" customClass="MainViewController" customModule="CochlearPhotos" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ir9-M9-ssn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rIw-6Q-F7G">
+                                <rect key="frame" x="136" y="813" width="142" height="49"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="23"/>
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" title="OK LET'S GO"/>
+                                <connections>
+                                    <action selector="didPressStartButton:" destination="jqs-Kk-CS7" eventType="touchUpInside" id="kff-zv-31V"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CHX-H4-Ba9">
+                                <rect key="frame" x="33" y="213" width="348" height="581"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <string key="text">● Keep track of all important photo locations!
+
+● Default locations have already been added, for which notes can be recorded!
+
+● Custom locations can be added into the map by pressing anywhere for 2 seconds!
+
+● Find your current location by pressing the top right corner!</string>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="22"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PHOTO LOCATION PINNER" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNA-Pr-Kgx">
+                                <rect key="frame" x="122" y="69" width="170" height="136"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="136" id="Bau-1c-gLw"/>
+                                    <constraint firstAttribute="width" constant="170" id="F7T-6d-jlZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JqJ-Bj-7x4">
+                                <rect key="frame" x="333" y="58" width="48" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="RW0-CT-d66"/>
+                                    <constraint firstAttribute="height" constant="52" id="Zxb-ir-GHC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="31"/>
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" title="X"/>
+                                <connections>
+                                    <action selector="didPressCloseButton:" destination="jqs-Kk-CS7" eventType="touchUpInside" id="3vQ-sn-W1I"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="rIw-6Q-F7G" firstAttribute="bottom" secondItem="2hQ-93-ems" secondAttribute="bottom" id="2Lj-dM-RQ2"/>
+                            <constraint firstItem="CHX-H4-Ba9" firstAttribute="trailing" secondItem="JqJ-Bj-7x4" secondAttribute="trailing" priority="750" id="4Rx-UX-25c"/>
+                            <constraint firstItem="fNA-Pr-Kgx" firstAttribute="centerX" secondItem="ir9-M9-ssn" secondAttribute="centerX" id="6RU-F6-sWT"/>
+                            <constraint firstItem="2hQ-93-ems" firstAttribute="trailing" secondItem="JqJ-Bj-7x4" secondAttribute="trailing" constant="33" id="EnR-mm-b61"/>
+                            <constraint firstItem="JqJ-Bj-7x4" firstAttribute="top" secondItem="2hQ-93-ems" secondAttribute="top" constant="14" id="EyF-Fh-z3h"/>
+                            <constraint firstItem="rIw-6Q-F7G" firstAttribute="top" secondItem="CHX-H4-Ba9" secondAttribute="bottom" constant="19" id="RN9-aN-E5Y"/>
+                            <constraint firstItem="CHX-H4-Ba9" firstAttribute="centerX" secondItem="fNA-Pr-Kgx" secondAttribute="centerX" id="Rt0-Gu-6Ul"/>
+                            <constraint firstItem="CHX-H4-Ba9" firstAttribute="top" secondItem="fNA-Pr-Kgx" secondAttribute="bottom" constant="8" id="Uxm-MF-8MN"/>
+                            <constraint firstItem="rIw-6Q-F7G" firstAttribute="centerX" secondItem="ir9-M9-ssn" secondAttribute="centerX" id="avd-KD-UPI"/>
+                            <constraint firstItem="fNA-Pr-Kgx" firstAttribute="top" secondItem="2hQ-93-ems" secondAttribute="top" constant="25" id="wBG-cY-rvN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2hQ-93-ems"/>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="JqJ-Bj-7x4" id="OIi-mb-my9"/>
+                        <outlet property="infoTextView" destination="CHX-H4-Ba9" id="xCH-4t-NZe"/>
+                        <outlet property="startButton" destination="rIw-6Q-F7G" id="cUI-bb-HGV"/>
+                        <outlet property="titleLabel" destination="fNA-Pr-Kgx" id="abi-p1-Y73"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rXB-rF-hZE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2304.3478260869565" y="-600"/>
+        </scene>
+    </scenes>
+</document>

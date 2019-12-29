@@ -55,12 +55,14 @@ extension Location: FetchableRecord, PersistableRecord  {
     }
     
     class func insert(locationList: [Location]){
-        
         do{
             for location in locationList {
                 location.locType = LocType.deflt.rawValue
-                try DBManager.shared.dbMethod.write { db in
-                    try location.insert(db)
+                let existingLocation = get(name: location.name)
+                if existingLocation == nil {
+                    try DBManager.shared.dbMethod.write { db in
+                        try location.insert(db)
+                    }
                 }
             }
         }catch{
@@ -69,7 +71,6 @@ extension Location: FetchableRecord, PersistableRecord  {
     }
     
     class func updateLocation(location: Location){
-        
         do{
             try DBManager.shared.dbMethod.write { db in
                 
@@ -101,7 +102,6 @@ extension Location: FetchableRecord, PersistableRecord  {
     }
     
     class func insertLocation(location: Location){
-        
         do{
             try DBManager.shared.dbMethod.write { db in
                 
@@ -121,7 +121,6 @@ extension Location: FetchableRecord, PersistableRecord  {
     }
 
     class func get(name: String)->Location!{
-        
         var returnLocation: Location!
         do{
             try _ = DBManager.shared.dbMethod.read { db in
@@ -138,7 +137,6 @@ extension Location: FetchableRecord, PersistableRecord  {
     }
     
     class func getAll()->[Location]?{
-        
         var returnArray: [Location] = []
         do{
             try _ = DBManager.shared.dbMethod.read { db in

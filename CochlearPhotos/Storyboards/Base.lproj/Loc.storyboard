@@ -10,7 +10,7 @@
         <!--PHOTO LOCATION PINNER-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LocViewController" customModule="CochlearPhotos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="LocViewController" customModule="CochlearPhotos" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -123,6 +123,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="PHOTO LOCATION PINNER" id="OVK-0S-fJ3">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="outline_info_black_36pt_1x" id="ITb-5w-RTo">
+                            <connections>
+                                <action selector="didPressInfoButton:" destination="BYZ-38-t0r" id="Vhb-8Y-GYU"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="my_location_black_36pt_1x" id="SWq-l7-Yg4">
                             <connections>
                                 <action selector="currentLocation:" destination="BYZ-38-t0r" id="KgR-6L-Eof"/>
@@ -223,7 +228,7 @@
         <!--Navigation Controller-->
         <scene sceneID="p2f-l8-bTv">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XVJ-qD-ouy" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="XVJ-qD-ouy" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ra9-XI-sTh">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -241,6 +246,7 @@
     </scenes>
     <resources>
         <image name="my_location_black_36pt_1x" width="36" height="36"/>
+        <image name="outline_info_black_36pt_1x" width="36" height="36"/>
         <image name="panbar" width="50" height="9"/>
     </resources>
 </document>

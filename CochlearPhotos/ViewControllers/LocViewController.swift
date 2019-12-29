@@ -13,32 +13,24 @@ import CoreLocation
 class LocViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
-    
     @IBOutlet weak var locationsView: UIView!
-    
     @IBOutlet weak var mapListHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var locTableView: UITableView!
     
     let locationDetailSegue = "locationDetailSegue"
     let LOADED = "loaded"
     
+    let mapGap: CGFloat = 120
+    var mapGapBottom: CGFloat!
     var mapViewHeight: CGFloat!
     var locViewOriginalCenter: CGPoint!
     var locViewOriginalY: CGFloat!
-    
     var locListHeightOrig: CGFloat!
     var locListHeightDef: CGFloat!
     
-    let mapGap: CGFloat = 120
-    var mapGapBottom: CGFloat!
-    
-    var locList: [Location] = []
-    
     let locationManager = CLLocationManager()
-    
+    var locList: [Location] = []
     var selectedLoc: CLLocationCoordinate2D = CLLocationCoordinate2D()
-    
     var pressedLoc = ""
     
     override func viewDidLoad() {
@@ -77,7 +69,6 @@ class LocViewController: UIViewController {
         setupLocTableView()
         pressedLoc = ""
         locListHeightOrig = mapListHeightConstraint.constant
-        
     }
    
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
@@ -86,6 +77,44 @@ class LocViewController: UIViewController {
         setHeights()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+           
+           if segue.identifier == locationDetailSegue {
+               if let locDetailViewController = segue.destination as? LocDetailViewController {
+                   locDetailViewController.selectedLocation = sender as? Location
+               }
+           }
+       }
+    
+    func initLocTable(){
+        
+        locTableView.delegate = self
+        locTableView.dataSource = self
+        locTableView.tableFooterView = UIView()
+        mapView.delegate = self
+    }
+    
+    func annotateLocationList(completion : @escaping (Bool)->()){
+        
+        for annotation in mapView.annotations{
+            mapView.removeAnnotation(annotation)
+        }
+        let locationList: [Location] = Location.getAll()!
+        
+        for (index, location) in locationList.enumerated() {
+            let locAnnotation = location.toLocAnnotation()
+            mapView.addAnnotation(locAnnotation)
+            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            if index == 0 && pressedLoc == LOADED {
+                let region = MKCoordinateRegion(center: locAnnotation.coordinate, span: span)
+                mapView.setRegion(region, animated: true)
+            }
+            let distance: Double = locDistance(from: locAnnotation) ?? 0
+            location.distance = distance
+            Location.updateDistance(location: location)
+        }
+        completion(true)
+    }
     
     @IBAction func didPanMapListView(_ sender: UIPanGestureRecognizer) {
         
@@ -122,16 +151,6 @@ class LocViewController: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == locationDetailSegue {
-            if let locDetailViewController = segue.destination as? LocDetailViewController {
-                locDetailViewController.selectedLocation = sender as? Location
-            }
-        }
-    }
-    
-    
     @IBAction func didLongPressMapView(_ sender: UILongPressGestureRecognizer) {
 
         let touchPoint = sender.location(in: mapView)
@@ -149,38 +168,6 @@ class LocViewController: UIViewController {
             pressedLoc = newPressedLoc
             performSegue(withIdentifier: locationDetailSegue, sender: loc)
         }
-
-    }
-    
-    func initLocTable(){
-        
-        locTableView.delegate = self
-        locTableView.dataSource = self
-        locTableView.tableFooterView = UIView()
-        mapView.delegate = self
-    }
-    
-    func annotateLocationList(completion : @escaping (Bool)->()){
-        
-        for annotation in mapView.annotations{
-            mapView.removeAnnotation(annotation)
-        }
-        
-        let locationList: [Location] = Location.getAll()!
-        
-        for (index, location) in locationList.enumerated() {
-            let locAnnotation = location.toLocAnnotation()
-            mapView.addAnnotation(locAnnotation)
-            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            if index == 0 && pressedLoc == LOADED {
-                let region = MKCoordinateRegion(center: locAnnotation.coordinate, span: span)
-                mapView.setRegion(region, animated: true)
-            }
-            let distance: Double = locDistance(from: locAnnotation) ?? 0
-            location.distance = distance
-            Location.updateDistance(location: location)
-        }
-        completion(true)
     }
     
     @IBAction func currentLocation(_ sender: UIBarButtonItem) {
@@ -189,6 +176,15 @@ class LocViewController: UIViewController {
         }
     }
     
+    @IBAction func didPressInfoButton(_ sender: UIBarButtonItem) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+        controller.modalPresentationStyle = .fullScreen
+        let navigationController = UINavigationController(rootViewController: controller)
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: false, completion: nil)
+    }
     
 }
 extension LocViewController: MKMapViewDelegate {
@@ -212,20 +208,9 @@ extension LocViewController: MKMapViewDelegate {
         return view
     }
  
-    /*
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        
-        let ann = view.annotation as! LocAnnotation
-        let placeName = ann.title!
-
-        if let loc = Location.get(name: placeName) {
-            performSegue(withIdentifier: locationDetailSegue, sender: loc)
-        }
-*/
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
         let loc:Location!
-        
         let name = view.annotation?.title
         
         if name is String {
@@ -240,27 +225,21 @@ extension LocViewController: MKMapViewDelegate {
             performSegue(withIdentifier: locationDetailSegue, sender: loc)
         }
     }
-    
-    
-}
 
+}
 extension LocViewController:  UITableViewDataSource, UITableViewDelegate {
     
     func setupLocTableView() {
         
         locListHeightDef = self.view.frame.height - mapGap
-        
         locList = Location.getAll() ?? [Location]()
-
         annotateLocationList(completion: { listDone in
             self.locList = Location.getAll() ?? [Location]()
             self.locTableView.reloadData()
         })
-        
         if selectedLoc.latitude == 0 {
             setHeights()
         }
-        
     }
     
     func setHeights(){
@@ -279,10 +258,10 @@ extension LocViewController:  UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-           let headerView = UIView()
-           headerView.backgroundColor = UIColor.clear
-           return headerView
-       }
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return locList.count
@@ -294,22 +273,8 @@ extension LocViewController:  UITableViewDataSource, UITableViewDelegate {
         let loc: Location = locList[indexPath.section]
         cell.layer.cornerRadius = 30
         cell.textLabel?.text = loc.name
-        if var distance = loc.distance {
-            distance =  Double(round(distance)/1000)
-            var unit = " km"
-            var distanceString = String(distance)
-            switch distance {
-            case 0..<1:
-                distanceString = String(Int(round(distance * 1000)))
-                unit = " m"
-            case 1..<10:
-                distanceString = String(format: "%.1f", distance)
-            case 10... :
-                distanceString = String(Int(round(distance)))
-            default:
-                distanceString = distanceString + ""
-            }
-            cell.detailTextLabel?.text = distanceString + unit
+        if let distance = loc.distance {
+            cell.detailTextLabel?.text = Util.distanceToString(distance)
         }
         return cell
     }
@@ -318,7 +283,6 @@ extension LocViewController:  UITableViewDataSource, UITableViewDelegate {
         
         let loc = locList[indexPath.section]
         selectedLoc = loc.toCL()
-        
         mapView.setCenter(loc.toCL(), animated: true)
         
         performSegue(withIdentifier: locationDetailSegue, sender: loc)

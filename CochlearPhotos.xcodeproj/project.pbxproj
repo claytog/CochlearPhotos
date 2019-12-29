@@ -23,10 +23,23 @@
 		699A2EDC23AC9F4000537FDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A2EDB23AC9F4000537FDF /* AppDelegate.swift */; };
 		699A2EDE23AC9F4000537FDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A2EDD23AC9F4000537FDF /* SceneDelegate.swift */; };
 		699A2EE023AC9F4000537FDF /* LocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A2EDF23AC9F4000537FDF /* LocViewController.swift */; };
-		699A2EE323AC9F4000537FDF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 699A2EE123AC9F4000537FDF /* Main.storyboard */; };
+		699A2EE323AC9F4000537FDF /* Loc.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 699A2EE123AC9F4000537FDF /* Loc.storyboard */; };
 		699A2EE523AC9F4200537FDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 699A2EE423AC9F4200537FDF /* Assets.xcassets */; };
 		699A2EE823AC9F4200537FDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 699A2EE623AC9F4200537FDF /* LaunchScreen.storyboard */; };
+		69C3439023B83C8C00ECF42B /* CochlearPhotosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C3438F23B83C8C00ECF42B /* CochlearPhotosTests.swift */; };
+		69C3439823B8581D00ECF42B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69C3439723B8581D00ECF42B /* Main.storyboard */; };
+		69C3439B23B85F1A00ECF42B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C3439A23B85F1A00ECF42B /* MainViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		69C3439223B83C8C00ECF42B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 699A2ED023AC9F4000537FDF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 699A2ED723AC9F4000537FDF;
+			remoteInfo = CochlearPhotos;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		22A765F85D270C5477E32A7C /* Pods_CochlearPhotos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CochlearPhotos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,10 +59,15 @@
 		699A2EDB23AC9F4000537FDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		699A2EDD23AC9F4000537FDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		699A2EDF23AC9F4000537FDF /* LocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocViewController.swift; sourceTree = "<group>"; };
-		699A2EE223AC9F4000537FDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		699A2EE223AC9F4000537FDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Loc.storyboard; sourceTree = "<group>"; };
 		699A2EE423AC9F4200537FDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		699A2EE723AC9F4200537FDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		699A2EE923AC9F4200537FDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69C3438D23B83C8C00ECF42B /* CochlearPhotosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CochlearPhotosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		69C3438F23B83C8C00ECF42B /* CochlearPhotosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CochlearPhotosTests.swift; sourceTree = "<group>"; };
+		69C3439123B83C8C00ECF42B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69C3439723B8581D00ECF42B /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		69C3439A23B85F1A00ECF42B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		849298562A641E8EDF1EFDD7 /* Pods-CochlearPhotos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CochlearPhotos.release.xcconfig"; path = "Target Support Files/Pods-CochlearPhotos/Pods-CochlearPhotos.release.xcconfig"; sourceTree = "<group>"; };
 		DE3B5E7091D8A7981A3E7751 /* Pods-CochlearPhotos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CochlearPhotos.debug.xcconfig"; path = "Target Support Files/Pods-CochlearPhotos/Pods-CochlearPhotos.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,6 +78,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				00598202DA871122837C3212 /* Pods_CochlearPhotos.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69C3438A23B83C8C00ECF42B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +134,7 @@
 				6902B01923AF2412007BD943 /* LocDetailViewController.swift */,
 				699A2EDF23AC9F4000537FDF /* LocViewController.swift */,
 				6981943123ACDDB20029821F /* LocAnnotation.swift */,
+				69C3439A23B85F1A00ECF42B /* MainViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -128,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				699A2EDA23AC9F4000537FDF /* CochlearPhotos */,
+				69C3438E23B83C8C00ECF42B /* CochlearPhotosTests */,
 				699A2ED923AC9F4000537FDF /* Products */,
 				10777B69DABD29A236AED91D /* Pods */,
 				1F51062E68EA693877DA24CC /* Frameworks */,
@@ -138,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				699A2ED823AC9F4000537FDF /* CochlearPhotos.app */,
+				69C3438D23B83C8C00ECF42B /* CochlearPhotosTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,14 +177,32 @@
 				6981942623ACAB7D0029821F /* Helpers */,
 				6981942823ACC6070029821F /* Model */,
 				6981942523ACAB370029821F /* Service */,
+				69C3439923B8583C00ECF42B /* Storyboards */,
 				699A2EDB23AC9F4000537FDF /* AppDelegate.swift */,
 				699A2EE423AC9F4200537FDF /* Assets.xcassets */,
-				699A2EE123AC9F4000537FDF /* Main.storyboard */,
-				699A2EDD23AC9F4000537FDF /* SceneDelegate.swift */,
-				699A2EE623AC9F4200537FDF /* LaunchScreen.storyboard */,
 				699A2EE923AC9F4200537FDF /* Info.plist */,
+				699A2EDD23AC9F4000537FDF /* SceneDelegate.swift */,
 			);
 			path = CochlearPhotos;
+			sourceTree = "<group>";
+		};
+		69C3438E23B83C8C00ECF42B /* CochlearPhotosTests */ = {
+			isa = PBXGroup;
+			children = (
+				69C3438F23B83C8C00ECF42B /* CochlearPhotosTests.swift */,
+				69C3439123B83C8C00ECF42B /* Info.plist */,
+			);
+			path = CochlearPhotosTests;
+			sourceTree = "<group>";
+		};
+		69C3439923B8583C00ECF42B /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				699A2EE623AC9F4200537FDF /* LaunchScreen.storyboard */,
+				699A2EE123AC9F4000537FDF /* Loc.storyboard */,
+				69C3439723B8581D00ECF42B /* Main.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +227,24 @@
 			productReference = 699A2ED823AC9F4000537FDF /* CochlearPhotos.app */;
 			productType = "com.apple.product-type.application";
 		};
+		69C3438C23B83C8C00ECF42B /* CochlearPhotosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69C3439623B83C8C00ECF42B /* Build configuration list for PBXNativeTarget "CochlearPhotosTests" */;
+			buildPhases = (
+				69C3438923B83C8C00ECF42B /* Sources */,
+				69C3438A23B83C8C00ECF42B /* Frameworks */,
+				69C3438B23B83C8C00ECF42B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				69C3439323B83C8C00ECF42B /* PBXTargetDependency */,
+			);
+			name = CochlearPhotosTests;
+			productName = CochlearPhotosTests;
+			productReference = 69C3438D23B83C8C00ECF42B /* CochlearPhotosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -193,6 +257,10 @@
 				TargetAttributes = {
 					699A2ED723AC9F4000537FDF = {
 						CreatedOnToolsVersion = 11.3;
+					};
+					69C3438C23B83C8C00ECF42B = {
+						CreatedOnToolsVersion = 11.3;
+						TestTargetID = 699A2ED723AC9F4000537FDF;
 					};
 				};
 			};
@@ -210,6 +278,7 @@
 			projectRoot = "";
 			targets = (
 				699A2ED723AC9F4000537FDF /* CochlearPhotos */,
+				69C3438C23B83C8C00ECF42B /* CochlearPhotosTests */,
 			);
 		};
 /* End PBXProject section */
@@ -222,8 +291,16 @@
 				699A2EE823AC9F4200537FDF /* LaunchScreen.storyboard in Resources */,
 				6981942023ACA44F0029821F /* API.plist in Resources */,
 				699A2EE523AC9F4200537FDF /* Assets.xcassets in Resources */,
+				69C3439823B8581D00ECF42B /* Main.storyboard in Resources */,
 				6981942C23ACC6730029821F /* locations.db in Resources */,
-				699A2EE323AC9F4000537FDF /* Main.storyboard in Resources */,
+				699A2EE323AC9F4000537FDF /* Loc.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69C3438B23B83C8C00ECF42B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,20 +364,37 @@
 				6981941E23ACA3C10029821F /* API.swift in Sources */,
 				6902B01A23AF2412007BD943 /* LocDetailViewController.swift in Sources */,
 				6981941A23ACA2A40029821F /* LocationsAPI.swift in Sources */,
+				69C3439B23B85F1A00ECF42B /* MainViewController.swift in Sources */,
 				6981942223ACA68C0029821F /* LocationList.swift in Sources */,
 				6981942423ACAA4F0029821F /* ParseJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		69C3438923B83C8C00ECF42B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69C3439023B83C8C00ECF42B /* CochlearPhotosTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		69C3439323B83C8C00ECF42B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 699A2ED723AC9F4000537FDF /* CochlearPhotos */;
+			targetProxy = 69C3439223B83C8C00ECF42B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
-		699A2EE123AC9F4000537FDF /* Main.storyboard */ = {
+		699A2EE123AC9F4000537FDF /* Loc.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				699A2EE223AC9F4000537FDF /* Base */,
 			);
-			name = Main.storyboard;
+			name = Loc.storyboard;
 			sourceTree = "<group>";
 		};
 		699A2EE623AC9F4200537FDF /* LaunchScreen.storyboard */ = {
@@ -468,6 +562,46 @@
 			};
 			name = Release;
 		};
+		69C3439423B83C8C00ECF42B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = R7769RMD73;
+				INFOPLIST_FILE = CochlearPhotosTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cochlear.CochlearPhotosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CochlearPhotos.app/CochlearPhotos";
+			};
+			name = Debug;
+		};
+		69C3439523B83C8C00ECF42B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = R7769RMD73;
+				INFOPLIST_FILE = CochlearPhotosTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.cochlear.CochlearPhotosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CochlearPhotos.app/CochlearPhotos";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -485,6 +619,15 @@
 			buildConfigurations = (
 				699A2EED23AC9F4200537FDF /* Debug */,
 				699A2EEE23AC9F4200537FDF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69C3439623B83C8C00ECF42B /* Build configuration list for PBXNativeTarget "CochlearPhotosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69C3439423B83C8C00ECF42B /* Debug */,
+				69C3439523B83C8C00ECF42B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

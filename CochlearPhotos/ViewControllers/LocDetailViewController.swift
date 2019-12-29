@@ -15,8 +15,6 @@ class LocDetailViewController: UIViewController {
     @IBOutlet weak var locNotesHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var locNameHeightConstraint: NSLayoutConstraint!
     
-    var selectedLocation: Location!
-    
     var isNew: Bool!
     var isDefault: Bool!
     var keyboardShowing: Bool! = false
@@ -24,6 +22,7 @@ class LocDetailViewController: UIViewController {
     var origTextViewColr: UIColor!
     var placeholderTextColr = UIColor.gray
     let placeholderTextViewText = "Add notes"
+    var selectedLocation: Location!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +30,6 @@ class LocDetailViewController: UIViewController {
         setupView()
         setupNameTextField()
         setupNotesTextView()
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,7 +39,6 @@ class LocDetailViewController: UIViewController {
     }
     
     func setupView(){
-        
         self.title = "Location"
         nameHeight = locNameHeightConstraint.constant
         isNew = selectedLocation.name == nil
@@ -137,14 +134,12 @@ extension LocDetailViewController : UITextFieldDelegate {
             locNameTextField.backgroundColor = UIColor.systemGroupedBackground;
         }else{
             if isEditing {
-                
                 locNameTextField.delegate = self
                 locNameTextField.isUserInteractionEnabled = true
                 locNameTextField.backgroundColor = UIColor.white;
                 locNameTextField.layer.borderWidth = 1
                 locNameTextField.layer.borderColor = UIColor.black.cgColor
                 locNameTextField.becomeFirstResponder()
-                
             }
         }
     }
@@ -154,7 +149,6 @@ extension LocDetailViewController : UITextFieldDelegate {
 extension LocDetailViewController : UITextViewDelegate {
     
     func setupNotesTextView(){
-        
         locNotesTextView.text = selectedLocation.notes
         if isEditing {
             locNameTextField.isUserInteractionEnabled = true
