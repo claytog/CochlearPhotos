@@ -52,9 +52,6 @@ class LocDetailViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(LocDetailViewController.keyboardWillDisappear(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),name: UIResponder.keyboardWillShowNotification,object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),name: UIResponder.keyboardWillHideNotification,object: nil)
-        
-        setPlaceholder()
-    
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
@@ -172,6 +169,7 @@ extension LocDetailViewController : UITextViewDelegate {
             locNotesTextView.backgroundColor = UIColor.systemGroupedBackground
             locNotesTextView.isEditable = false
         }
+        setPlaceholder()
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {

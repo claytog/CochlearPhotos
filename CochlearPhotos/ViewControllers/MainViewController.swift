@@ -25,7 +25,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         self.view.isHidden = true
         
         requestLocAuthority()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

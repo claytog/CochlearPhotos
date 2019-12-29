@@ -17,7 +17,7 @@ enum LocType:String {
 }
 
 class Location: Codable {
-    
+    var id: Int!
     var name: String!
     var lat: Double!
     var lng: Double!
@@ -27,6 +27,7 @@ class Location: Codable {
     var dateUpdated: Double?
     
     init(){
+        id = 0
         name = ""
         lat = 0.0
         lng = 0.00
@@ -74,11 +75,11 @@ extension Location: FetchableRecord, PersistableRecord  {
         do{
             try DBManager.shared.dbMethod.write { db in
                 
-               try db.execute(sql: "UPDATE location SET name=?, notes=?, dateUpdated=? WHERE name=?",
+               try db.execute(sql: "UPDATE location SET name=?, notes=?, dateUpdated=? WHERE id=?",
                 arguments: [location.name,
                             location.notes,
                             Util.getEpoch(),
-                            location.name]
+                            location.id]
                 )
             }
         }catch{
@@ -90,10 +91,10 @@ extension Location: FetchableRecord, PersistableRecord  {
         do{
             try DBManager.shared.dbMethod.write { db in
                 
-               try db.execute(sql: "UPDATE location SET distance=?, dateUpdated=? WHERE name=?",
+               try db.execute(sql: "UPDATE location SET distance=?, dateUpdated=? WHERE id=?",
                 arguments: [location.distance,
                             Util.getEpoch(),
-                            location.name]
+                            location.id]
                 )
             }
         }catch{
@@ -105,8 +106,9 @@ extension Location: FetchableRecord, PersistableRecord  {
         do{
             try DBManager.shared.dbMethod.write { db in
                 
-                try db.execute(sql: "REPLACE INTO location VALUES (?,?,?,?,?,?,?)",
-                      arguments: [location.name,
+                try db.execute(sql: "REPLACE INTO location VALUES (?,?,?,?,?,?,?,?)",
+                      arguments: [nil,
+                                  location.name,
                                   location.lat,
                                   location.lng,
                                   location.locType,
@@ -120,6 +122,22 @@ extension Location: FetchableRecord, PersistableRecord  {
         }
     }
 
+    class func get(id: Int)->Location!{
+        var returnLocation: Location!
+        do{
+            try _ = DBManager.shared.dbMethod.read { db in
+                
+                returnLocation = try Location.fetchOne(db,
+                                                sql: "SELECT * FROM Location WHERE id = ?",
+                                                arguments: [id])
+            }
+        }catch{
+            print(error.localizedDescription)
+        }
+        
+        return returnLocation
+    }
+    
     class func get(name: String)->Location!{
         var returnLocation: Location!
         do{
