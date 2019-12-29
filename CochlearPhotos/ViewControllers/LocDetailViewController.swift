@@ -21,6 +21,7 @@ class LocDetailViewController: UIViewController {
     var nameHeight: CGFloat!
     var origTextViewColr: UIColor!
     var placeholderTextColr = UIColor.gray
+    let placeholderNameText = "Name of this location"
     let placeholderTextViewText = "Add notes"
     var selectedLocation: Location!
     
@@ -51,6 +52,9 @@ class LocDetailViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(LocDetailViewController.keyboardWillDisappear(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),name: UIResponder.keyboardWillShowNotification,object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),name: UIResponder.keyboardWillHideNotification,object: nil)
+        
+        setPlaceholder()
+    
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
@@ -77,12 +81,7 @@ class LocDetailViewController: UIViewController {
         if !isDefault {
             selectedLocation.name = locNameTextField.text
         }
-        if locNotesTextView.text.isEmpty {
-            locNotesTextView.text = placeholderTextViewText
-            locNotesTextView.textColor = placeholderTextColr
-        }else{
-            selectedLocation.notes = locNotesTextView.text
-        }
+        setPlaceholder()
         if isNew {
             if !selectedLocation.name.isEmpty {
                 Location.insertLocation(location: selectedLocation)
@@ -109,6 +108,15 @@ class LocDetailViewController: UIViewController {
         }
         locNotesHeightConstraint.constant = heightToChange
     }
+    
+    func setPlaceholder(){
+        if locNotesTextView.text.isEmpty {
+            locNotesTextView.text = placeholderTextViewText
+            locNotesTextView.textColor = placeholderTextColr
+        }else{
+            selectedLocation.notes = locNotesTextView.text
+        }
+    }
   
     
     @IBAction func didTapNameTextField(_ sender: UITapGestureRecognizer) {
@@ -128,6 +136,8 @@ extension LocDetailViewController : UITextFieldDelegate {
     func setupNameTextField(){
         
         locNameTextField.text = selectedLocation.name
+        locNameTextField.attributedPlaceholder = NSAttributedString(string: placeholderNameText,
+        attributes: [NSAttributedString.Key.foregroundColor: placeholderTextColr])
         
         if isDefault {
             locNameTextField.isUserInteractionEnabled = false
@@ -136,7 +146,6 @@ extension LocDetailViewController : UITextFieldDelegate {
             if isEditing {
                 locNameTextField.delegate = self
                 locNameTextField.isUserInteractionEnabled = true
-                locNameTextField.backgroundColor = UIColor.white;
                 locNameTextField.layer.borderWidth = 1
                 locNameTextField.layer.borderColor = UIColor.black.cgColor
                 locNameTextField.becomeFirstResponder()
@@ -149,11 +158,14 @@ extension LocDetailViewController : UITextFieldDelegate {
 extension LocDetailViewController : UITextViewDelegate {
     
     func setupNotesTextView(){
-        locNotesTextView.text = selectedLocation.notes
+        if let notes = selectedLocation.notes, !notes.isEmpty {
+            locNotesTextView.text = notes
+        }
+        
         if isEditing {
             locNameTextField.isUserInteractionEnabled = true
             locNotesTextView.layer.borderWidth = 1
-            locNotesTextView.layer.borderColor = UIColor.black.cgColor
+            locNotesTextView.layer.borderColor = UIColor.label.cgColor
             locNotesTextView.isEditable = true
             locNotesTextView.becomeFirstResponder()
         }else{

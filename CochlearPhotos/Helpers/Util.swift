@@ -43,14 +43,10 @@ class Util {
     private static let onboardKey: String = "onboard"
     
     class func isOnboard()->Bool{
-        
         return UserDefaults.standard.bool(forKey: onboardKey)
-        
     }
     
     class func onboard(isOnboard:Bool){
-    
         UserDefaults.standard.setValue(isOnboard, forKey: onboardKey)
-    
     }
 }

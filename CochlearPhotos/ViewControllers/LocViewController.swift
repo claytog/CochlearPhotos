@@ -35,8 +35,8 @@ class LocViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        pressedLoc = LOADED
+                
+        setupView()
         
         initLocTable()
         
@@ -69,6 +69,8 @@ class LocViewController: UIViewController {
         setupLocTableView()
         pressedLoc = ""
         locListHeightOrig = mapListHeightConstraint.constant
+        
+        
     }
    
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
@@ -85,6 +87,17 @@ class LocViewController: UIViewController {
                }
            }
        }
+    
+    func setupView(){
+        pressedLoc = LOADED
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    
+    @objc func willEnterForeground() {
+
+        setupLocTableView()
+    }
     
     func initLocTable(){
         
@@ -174,16 +187,6 @@ class LocViewController: UIViewController {
         if let coor = mapView.userLocation.location?.coordinate{
             mapView.setCenter(coor, animated: true)
         }
-    }
-    
-    @IBAction func didPressInfoButton(_ sender: UIBarButtonItem) {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-        controller.modalPresentationStyle = .fullScreen
-        let navigationController = UINavigationController(rootViewController: controller)
-        navigationController.modalPresentationStyle = .fullScreen
-        self.present(navigationController, animated: false, completion: nil)
     }
     
 }
@@ -300,6 +303,7 @@ extension LocViewController: CLLocationManagerDelegate {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
+            
         }
         mapView.delegate = self
         mapView.mapType = .standard
@@ -310,6 +314,10 @@ extension LocViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
          locationManager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        self.setupLocTableView()
     }
     
     func locDistance(from point: MKAnnotation) -> Double? {

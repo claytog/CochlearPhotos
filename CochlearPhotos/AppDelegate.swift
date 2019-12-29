@@ -13,6 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable") // suppress logging complaints about contraints
+        UserDefaults.standard.setValue(false, forKey: "NSAllowsDefaultLineBreakStrategy") // set as true by default causes premature word-wrapping
+        
         return true
     }
 

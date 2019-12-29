@@ -15,17 +15,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rIw-6Q-F7G">
-                                <rect key="frame" x="136" y="813" width="142" height="49"/>
-                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="23"/>
-                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <state key="normal" title="OK LET'S GO"/>
-                                <connections>
-                                    <action selector="didPressStartButton:" destination="jqs-Kk-CS7" eventType="touchUpInside" id="kff-zv-31V"/>
-                                </connections>
-                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CHX-H4-Ba9">
-                                <rect key="frame" x="33" y="213" width="348" height="581"/>
+                                <rect key="frame" x="33" y="213" width="348" height="560"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <string key="text">● Keep track of all important photo locations!
 
@@ -48,28 +39,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JqJ-Bj-7x4">
-                                <rect key="frame" x="333" y="58" width="48" height="52"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="48" id="RW0-CT-d66"/>
-                                    <constraint firstAttribute="height" constant="52" id="Zxb-ir-GHC"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="31"/>
-                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <state key="normal" title="X"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rIw-6Q-F7G">
+                                <rect key="frame" x="136" y="783" width="142" height="49"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="23"/>
+                                <state key="normal" title="OK LET'S GO"/>
                                 <connections>
-                                    <action selector="didPressCloseButton:" destination="jqs-Kk-CS7" eventType="touchUpInside" id="3vQ-sn-W1I"/>
+                                    <action selector="didPressStartButton:" destination="jqs-Kk-CS7" eventType="touchUpInside" id="kff-zv-31V"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="rIw-6Q-F7G" firstAttribute="bottom" secondItem="2hQ-93-ems" secondAttribute="bottom" id="2Lj-dM-RQ2"/>
-                            <constraint firstItem="CHX-H4-Ba9" firstAttribute="trailing" secondItem="JqJ-Bj-7x4" secondAttribute="trailing" priority="750" id="4Rx-UX-25c"/>
+                            <constraint firstItem="rIw-6Q-F7G" firstAttribute="bottom" secondItem="2hQ-93-ems" secondAttribute="bottom" constant="-30" id="2Lj-dM-RQ2"/>
                             <constraint firstItem="fNA-Pr-Kgx" firstAttribute="centerX" secondItem="ir9-M9-ssn" secondAttribute="centerX" id="6RU-F6-sWT"/>
-                            <constraint firstItem="2hQ-93-ems" firstAttribute="trailing" secondItem="JqJ-Bj-7x4" secondAttribute="trailing" constant="33" id="EnR-mm-b61"/>
-                            <constraint firstItem="JqJ-Bj-7x4" firstAttribute="top" secondItem="2hQ-93-ems" secondAttribute="top" constant="14" id="EyF-Fh-z3h"/>
-                            <constraint firstItem="rIw-6Q-F7G" firstAttribute="top" secondItem="CHX-H4-Ba9" secondAttribute="bottom" constant="19" id="RN9-aN-E5Y"/>
+                            <constraint firstItem="CHX-H4-Ba9" firstAttribute="leading" secondItem="2hQ-93-ems" secondAttribute="leading" constant="33" id="G2r-FF-hEU"/>
+                            <constraint firstItem="rIw-6Q-F7G" firstAttribute="top" secondItem="CHX-H4-Ba9" secondAttribute="bottom" constant="10" id="RN9-aN-E5Y"/>
                             <constraint firstItem="CHX-H4-Ba9" firstAttribute="centerX" secondItem="fNA-Pr-Kgx" secondAttribute="centerX" id="Rt0-Gu-6Ul"/>
                             <constraint firstItem="CHX-H4-Ba9" firstAttribute="top" secondItem="fNA-Pr-Kgx" secondAttribute="bottom" constant="8" id="Uxm-MF-8MN"/>
                             <constraint firstItem="rIw-6Q-F7G" firstAttribute="centerX" secondItem="ir9-M9-ssn" secondAttribute="centerX" id="avd-KD-UPI"/>
@@ -78,7 +62,6 @@
                         <viewLayoutGuide key="safeArea" id="2hQ-93-ems"/>
                     </view>
                     <connections>
-                        <outlet property="closeButton" destination="JqJ-Bj-7x4" id="OIi-mb-my9"/>
                         <outlet property="infoTextView" destination="CHX-H4-Ba9" id="xCH-4t-NZe"/>
                         <outlet property="startButton" destination="rIw-6Q-F7G" id="cUI-bb-HGV"/>
                         <outlet property="titleLabel" destination="fNA-Pr-Kgx" id="abi-p1-Y73"/>

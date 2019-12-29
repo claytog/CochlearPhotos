@@ -7,60 +7,71 @@
 //
 
 import UIKit
+import CoreLocation
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var infoTextView: UITextView!
     @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var closeButton: UIButton!
     
     let actInd: UIActivityIndicatorView = UIActivityIndicatorView()
     
+    let locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        titleLabel.transform = CGAffineTransform(rotationAngle: CGFloat(0.2))  // rotation line
-
-        UIView.animate(withDuration: 1.0, animations: {
-            self.titleLabel.transform = CGAffineTransform(rotationAngle: 0);
-        })
+        startButton.isHidden = true
+        self.view.isHidden = true
+        
+        requestLocAuthority()
         
     }
-       
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         if Util.isOnboard(){
-            startButton.isHidden = true
+            openLocStoryboard()
         }else{
-            closeButton.isHidden = true
-        }
-        
-    }
-    override func viewDidAppear(_ animated: Bool) {
-       super.viewDidAppear(animated)
-       
-        if !Util.isOnboard(){
+            self.view.isHidden = false
+            animateTitle()
             if DBManager.shared.openOrCopyDatabase() { // initialise a singleton instance of the database
-                showActivityIndicator()
-                LocationsAPI.get( completion: { locationsResponse in
+               showActivityIndicator()
+               LocationsAPI.get( completion: { locationsResponse in
                     print ("\n**** CONTENT DONLOADED, opening storyboard ***\n")
                     sleep(1)
                     self.actInd.stopAnimating()
-                    self.openStoryboard()
-                })
+                    self.startButton.isHidden = false
+               })
             }
         }
     }
-       
-    func openStoryboard(){
-       if Util.isOnboard(){
-           openLocStoryboard()
-       }
-    }
 
+    func requestLocAuthority(){
+        let locStatus = CLLocationManager.authorizationStatus()
+        switch locStatus {
+          case .notDetermined:
+             locationManager.requestWhenInUseAuthorization()
+          return
+          case .denied, .restricted:
+             let alert = UIAlertController(title: "Location Services are disabled", message: "Please enable Location Services in your Settings", preferredStyle: .alert)
+             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+             alert.addAction(okAction)
+             present(alert, animated: true, completion: nil)
+          return
+          case .authorizedAlways, .authorizedWhenInUse:
+          break
+        @unknown default:
+           debugPrint ("unknown")
+        }
+    }
+    
     func showActivityIndicator() {
        actInd.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0);
        actInd.center = self.view.center
@@ -72,10 +83,6 @@ class MainViewController: UIViewController {
        actInd.startAnimating()
     }
     
-    @IBAction func didPressCloseButton(_ sender: UIButton) {
-        openLocStoryboard()
-    }
-    
     @IBAction func didPressStartButton(_ sender: UIButton) {
         Util.onboard(isOnboard: true)
         openLocStoryboard()
@@ -84,10 +91,16 @@ class MainViewController: UIViewController {
     func openLocStoryboard(){
         let storyboard = UIStoryboard(name: "Loc", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "LocViewController") as! LocViewController
-        controller.modalPresentationStyle = .fullScreen
         let navigationController = UINavigationController(rootViewController: controller)
         navigationController.modalPresentationStyle = .fullScreen
         self.present(navigationController, animated: false, completion: nil)
+    }
+    
+    func animateTitle(){
+        titleLabel.transform = CGAffineTransform(rotationAngle: CGFloat(0.2))  // rotation line
+        UIView.animate(withDuration: 1.0, animations: {
+            self.titleLabel.transform = CGAffineTransform(rotationAngle: 0);
+        })
     }
 
 }

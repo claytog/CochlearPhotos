@@ -123,11 +123,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="PHOTO LOCATION PINNER" id="OVK-0S-fJ3">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="outline_info_black_36pt_1x" id="ITb-5w-RTo">
-                            <connections>
-                                <action selector="didPressInfoButton:" destination="BYZ-38-t0r" id="Vhb-8Y-GYU"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="my_location_black_36pt_1x" id="SWq-l7-Yg4">
                             <connections>
                                 <action selector="currentLocation:" destination="BYZ-38-t0r" id="KgR-6L-Eof"/>
@@ -166,6 +161,7 @@
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name of this location" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M2w-pN-OKt">
                                 <rect key="frame" x="20" y="108" width="374" height="41"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="CTK-8K-zG8"/>
@@ -246,7 +242,6 @@
     </scenes>
     <resources>
         <image name="my_location_black_36pt_1x" width="36" height="36"/>
-        <image name="outline_info_black_36pt_1x" width="36" height="36"/>
         <image name="panbar" width="50" height="9"/>
     </resources>
 </document>
