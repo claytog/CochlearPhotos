@@ -276,6 +276,10 @@ extension LocViewController:  UITableViewDataSource, UITableViewDelegate {
         let loc: Location = locList[indexPath.section]
         cell.layer.cornerRadius = 30
         cell.textLabel?.text = loc.name
+        cell.backgroundColor = UIColor.gray
+        if loc.locType == LocType.custom.rawValue {
+            cell.backgroundColor = UIColor.secondarySystemGroupedBackground
+        }
         if let distance = loc.distance {
             cell.detailTextLabel?.text = Util.distanceToString(distance)
         }
