@@ -6,6 +6,10 @@ CochlearPhotos uses two POD dependancies:
 * [Alamofire](https://github.com/Alamofire/Alamofire)
 * [GRDB](https://github.com/groue/GRDB.swift)
 
+Material Design
+
+* [Material Icons](https://material.io/resources/icons)
+
 ### Product requirements
 * Provide a map screen (using any map SDK of your choosing)
 * Allow custom locations to be added from the map screen
