@@ -65,12 +65,7 @@ class LocViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        setupLocTableView()
-        pressedLoc = ""
-        locListHeightOrig = mapListHeightConstraint.constant
-        
-        
+        refreshView()
     }
    
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
@@ -92,6 +87,12 @@ class LocViewController: UIViewController {
         pressedLoc = LOADED
         
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    
+    func refreshView(){
+        setupLocTableView()
+        pressedLoc = ""
+        locListHeightOrig = mapListHeightConstraint.constant
     }
     
     @objc func willEnterForeground() {
@@ -181,6 +182,10 @@ class LocViewController: UIViewController {
             pressedLoc = newPressedLoc
             performSegue(withIdentifier: locationDetailSegue, sender: loc)
         }
+    }
+    
+    @IBAction func didPressRefreshButton(_ sender: UIBarButtonItem) {
+        refreshView()
     }
     
     @IBAction func currentLocation(_ sender: UIBarButtonItem) {
@@ -277,7 +282,7 @@ extension LocViewController:  UITableViewDataSource, UITableViewDelegate {
         cell.layer.cornerRadius = 30
         cell.textLabel?.text = loc.name
         cell.textLabel?.textColor = UIColor.black
-        cell.backgroundColor = UIColor.lightGray
+        cell.backgroundColor = UIColor.systemGray5
         if loc.locType == LocType.custom.rawValue {
             cell.textLabel?.textColor = UIColor.label
             cell.backgroundColor = UIColor.secondarySystemGroupedBackground

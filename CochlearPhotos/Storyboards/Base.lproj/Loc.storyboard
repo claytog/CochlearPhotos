@@ -123,6 +123,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="PHOTO LOCATION PINNER" id="OVK-0S-fJ3">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="refresh_black_36pt_1x" id="dsv-Yf-wQr">
+                            <connections>
+                                <action selector="didPressRefreshButton:" destination="BYZ-38-t0r" id="CAi-Er-Ua6"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="my_location_black_36pt_1x" id="SWq-l7-Yg4">
                             <connections>
                                 <action selector="currentLocation:" destination="BYZ-38-t0r" id="KgR-6L-Eof"/>
@@ -243,5 +248,6 @@
     <resources>
         <image name="my_location_black_36pt_1x" width="36" height="36"/>
         <image name="panbar" width="50" height="9"/>
+        <image name="refresh_black_36pt_1x" width="36" height="36"/>
     </resources>
 </document>

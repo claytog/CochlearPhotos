@@ -21,9 +21,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        startButton.isHidden = true
-        self.view.isHidden = true
-        
+        setupView()
         requestLocAuthority()
     }
     
@@ -71,6 +69,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    func setupView(){
+        startButton.isHidden = true
+        view.isHidden = true
+    }
+    
     func showActivityIndicator() {
        actInd.frame = CGRect(x: 0.0, y: 0.0, width: 40.0, height: 40.0);
        actInd.center = self.view.center
@@ -78,7 +81,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
        actInd.transform = transform
        actInd.hidesWhenStopped = true
        actInd.style = UIActivityIndicatorView.Style.medium
-       self.view.addSubview(actInd)
+       view.addSubview(actInd)
        actInd.startAnimating()
     }
     
@@ -92,7 +95,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         let controller = storyboard.instantiateViewController(withIdentifier: "LocViewController") as! LocViewController
         let navigationController = UINavigationController(rootViewController: controller)
         navigationController.modalPresentationStyle = .fullScreen
-        self.present(navigationController, animated: false, completion: nil)
+        present(navigationController, animated: false, completion: nil)
     }
     
     func animateTitle(){
