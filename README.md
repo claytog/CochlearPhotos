@@ -48,7 +48,10 @@ Material Design
 ### Location List
 * A location list of default locations will initially be presented over the map view.
 * The location list can be moved up and down to reveal more or less of the map view.
-* Default location cells have a gray background.
+* Default location cells have a gray background, custom cells have a white background (black in dark mode).
+* For distances less than 1 kilometre, the distance will be displayed in meters with no decimal place.
+* For distances between than 1 kilometre and 10 kilometres, the distance will be displayed in kilometres to one decimal place.
+* For distances greater than 10 kilometres, the distance will be displayed in kilometres with no decimal place.
 ### Location Detail
 * For Default locations, the name is read-only, and notes is editable.
 * For Custom locations, both name and notes is editable.
