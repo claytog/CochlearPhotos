@@ -241,11 +241,7 @@ extension LocViewController:  UITableViewDataSource, UITableViewDelegate {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor.clear
-        return headerView
-    }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return locList.count
